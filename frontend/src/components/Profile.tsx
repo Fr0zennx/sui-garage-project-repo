@@ -24,7 +24,7 @@ function Profile({ onClose }: ProfileProps) {
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
     const scrollPercentage = container.scrollTop / (container.scrollHeight - container.clientHeight);
-    
+
     // Calculate index: 0 to 7 (8 total cards)
     let newIndex;
     if (scrollPercentage <= 0.01) {
@@ -34,7 +34,7 @@ function Profile({ onClose }: ProfileProps) {
     } else {
       newIndex = Math.round(scrollPercentage * 7); // 0-7 range
     }
-    
+
     if (newIndex !== activeCardIndex) {
       // Cancel any pending scroll timeout
       if (scrollTimeoutRef.current) {
@@ -50,7 +50,7 @@ function Profile({ onClose }: ProfileProps) {
       const direction = newIndex > previousIndexRef.current ? 'forward' : 'backward';
       previousIndexRef.current = newIndex;
       setActiveCardIndex(newIndex);
-      
+
       // Debounce rapid scrolls
       scrollTimeoutRef.current = window.setTimeout(() => {
         performCardSwap(newIndex, direction);
@@ -61,9 +61,9 @@ function Profile({ onClose }: ProfileProps) {
   const performCardSwap = (targetIndex: number, direction: 'forward' | 'backward') => {
     const currentOrder = [...orderRef.current];
     const currentFrontIndex = currentOrder[0];
-    
+
     if (targetIndex === currentFrontIndex) return;
-    
+
     const posInOrder = currentOrder.indexOf(targetIndex);
     if (posInOrder === -1) return;
 
@@ -84,20 +84,20 @@ function Profile({ onClose }: ProfileProps) {
     if (direction === 'forward') {
       // Forward: Current front card drops, others promote forward
       const rotations = posInOrder;
-      
+
       for (let i = 0; i < rotations; i++) {
         const [front, ...rest] = currentOrder;
         const frontEl = cardRefs.current[front];
-        
+
         if (!frontEl) continue;
-        
+
         // Drop front card down
         masterTimeline.to(frontEl, {
           y: '+=500',
           duration: 0.6,
           ease: 'power2.inOut'
         }, i > 0 ? '<0.1' : 0);
-        
+
         // Promote other cards forward
         masterTimeline.addLabel(`promote${i}`, '-=0.35');
         rest.forEach((idx, j) => {
@@ -113,7 +113,7 @@ function Profile({ onClose }: ProfileProps) {
             ease: 'power2.inOut'
           }, `promote${i}+=${j * 0.1}`);
         });
-        
+
         // Return front card to back
         const backSlot = makeSlot(7, 60, 70, 8);
         masterTimeline.addLabel(`return${i}`, `promote${i}+=0.15`);
@@ -127,7 +127,7 @@ function Profile({ onClose }: ProfileProps) {
           duration: 0.6,
           ease: 'power2.inOut'
         }, `return${i}`);
-        
+
         currentOrder.splice(0, 1);
         currentOrder.push(front);
       }
@@ -135,16 +135,16 @@ function Profile({ onClose }: ProfileProps) {
       // Backward: Need to bring target to front from the back
       // Calculate how many backward rotations needed
       const stepsNeeded = 8 - posInOrder;
-      
+
       for (let i = 0; i < stepsNeeded; i++) {
         const backIndex = currentOrder[currentOrder.length - 1];
         const backEl = cardRefs.current[backIndex];
-        
+
         if (!backEl) continue;
-        
+
         const frontSlot = makeSlot(0, 60, 70, 8);
         const startPosition = i === 0 ? 0 : '<0.1';
-        
+
         // Push all current cards back first
         masterTimeline.addLabel(`pushback${i}`, startPosition);
         currentOrder.slice(0, -1).forEach((idx, j) => {
@@ -160,33 +160,33 @@ function Profile({ onClose }: ProfileProps) {
             ease: 'power2.inOut'
           }, `pushback${i}+=${j * 0.08}`);
         });
-        
+
         // Set back card below screen and bring to front
         masterTimeline.addLabel(`rise${i}`, `pushback${i}+=0.2`);
-        masterTimeline.set(backEl, { 
+        masterTimeline.set(backEl, {
           y: frontSlot.y + 500,
           x: frontSlot.x,
           z: frontSlot.z,
           zIndex: 999
         }, `rise${i}`);
-        
+
         // Animate back card rising to front
         masterTimeline.to(backEl, {
           y: frontSlot.y,
           duration: 0.6,
           ease: 'power2.inOut'
         }, `rise${i}`);
-        
+
         // Final z-index fix
         masterTimeline.call(() => {
           gsap.set(backEl, { zIndex: frontSlot.zIndex });
         }, undefined, `rise${i}+=0.6`);
-        
+
         currentOrder.pop();
         currentOrder.unshift(backIndex);
       }
     }
-    
+
     orderRef.current = currentOrder;
   };
 
@@ -240,10 +240,17 @@ function Profile({ onClose }: ProfileProps) {
   const cards = [
     {
       icon: '',
-      label: 'Hello Move',
+      label: 'Sui Garage',
       value: '',
       desc: 'Currently connected to Sui\'s testing environment',
       number: '0'
+    },
+    {
+      icon: '',
+      label: 'Sui Garage',
+      value: '',
+      desc: 'Currently connected to Sui\'s testing environment',
+      number: '1'
     },
     {
       icon: '',
@@ -308,19 +315,19 @@ function Profile({ onClose }: ProfileProps) {
         {/* Left side - Profile photo */}
         <div className="profile-left">
           <div className="profile-photo-container">
-            <div 
+            <div
               className="profile-photo"
               style={{ background: getGradientFromAddress(currentAccount.address) }}
             >
               <div className="profile-photo-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
                 </svg>
               </div>
             </div>
             <div className="profile-photo-glow" style={{ background: getGradientFromAddress(currentAccount.address) }}></div>
           </div>
-          
+
           <div className="profile-wallet-info">
             <h3>Wallet Address</h3>
             <p className="profile-address">{currentAccount.address}</p>
@@ -341,7 +348,7 @@ function Profile({ onClose }: ProfileProps) {
                   color="cyan"
                   speed="5s"
                   onClick={() => {
-                    if (activeCardIndex === 0) {
+                    if (activeCardIndex === 0 || activeCardIndex === 1) {
                       setShowLesson(true);
                     } else {
                       console.log(`Started ${cards[activeCardIndex].label}`);
@@ -355,7 +362,7 @@ function Profile({ onClose }: ProfileProps) {
               {/* Right side - Manual Card Stack */}
               <div className="manual-card-swap-container">
                 {cards.map((card, index) => (
-                  <div 
+                  <div
                     key={index}
                     ref={(el) => (cardRefs.current[index] = el)}
                     className="manual-card"

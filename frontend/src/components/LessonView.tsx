@@ -3322,6 +3322,16 @@ function LessonView({ onClose }: LessonViewProps) {
   const [errors, setErrors] = useState<Array<{ line: number, message: string }>>([]);
   const [terminalOutput, setTerminalOutput] = useState<string>('');
   const [hasChecked, setHasChecked] = useState<boolean>(false);
+  const [showCompletionPopup, setShowCompletionPopup] = useState<boolean>(false);
+  const [showCelebration, setShowCelebration] = useState<boolean>(false);
+
+  const handleCompleteCourse = () => {
+    setShowCelebration(true);
+    setTimeout(() => {
+      setShowCelebration(false);
+      setShowCompletionPopup(true);
+    }, 4500); // 4.5 seconds of celebration
+  };
 
   const handleEditorDidMount = (editor: Monaco.editor.IStandaloneCodeEditor, monaco: typeof Monaco) => {
     editorRef.current = editor;
@@ -3676,13 +3686,60 @@ function LessonView({ onClose }: LessonViewProps) {
                 {currentChapter < chapters.length - 1 ? (
                   <button className="btn-next-chapter" disabled={!isCorrect} onClick={handleNextChapter}>Next Chapter →</button>
                 ) : (
-                  <button className="btn-next-chapter" disabled={!isCorrect}>Complete Course 🎉</button>
+                  <button className="btn-next-chapter" disabled={!isCorrect} onClick={handleCompleteCourse}>Complete Course 🎉</button>
                 )}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Celebration Overlay */}
+      {showCelebration && (
+        <div className="celebration-overlay">
+          <div className="confetti-container">
+            {[...Array(150)].map((_, i) => (
+              <div key={i} className="confetti" style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                backgroundColor: ['#ff0', '#f00', '#0f0', '#00f', '#f0f'][Math.floor(Math.random() * 5)]
+              }}></div>
+            ))}
+          </div>
+          <div className="golden-car-container">
+            <img src="/golden_car.png" alt="Golden Sui Car" className="golden-car-img" />
+            <div className="nitro-glow"></div>
+            <h1 className="celebration-text">LEGENDARY MECHANIC!</h1>
+          </div>
+        </div>
+      )}
+
+      {showCompletionPopup && (
+        <div className="completion-popup-overlay">
+          <div className="completion-popup">
+            <h2>Course Completed! 🏆</h2>
+            <div className="completion-message">
+              <p>
+                Congratulations, Master! You have successfully navigated the high-speed curves of the Sui Move language. From building your first chassis to mastering complex dynamic fields and programmable transactions, you’ve proven you have what it takes to build the next generation of decentralized applications.
+              </p>
+
+              <h3>Technical Skills Unlocked:</h3>
+              <ul style={{ textAlign: 'left', marginTop: '1rem', paddingLeft: '1.5rem', listStyleType: 'disc' }}>
+                <li style={{ marginBottom: '0.5rem' }}><strong>Object-Centric Architecture:</strong> You now understand that everything is an object.</li>
+                <li style={{ marginBottom: '0.5rem' }}><strong>Safety First:</strong> You mastered Move's strict ownership and type safety.</li>
+                <li style={{ marginBottom: '0.5rem' }}><strong>Massive Scalability:</strong> You can now manage thousands of assets using Tables and Bags.</li>
+                <li style={{ marginBottom: '0.5rem' }}><strong>On-chain Logic:</strong> You created self-sovereign garage stats and admin capabilities.</li>
+              </ul>
+            </div>
+            <div className="popup-actions">
+              <button className="btn-close-popup" onClick={() => setShowCompletionPopup(false)}>Close</button>
+              <button className="btn-profile-popup" onClick={onClose}>
+                Go to Profile 👤
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
