@@ -22,6 +22,7 @@ module sui_garage::car_factory {
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const [errors, setErrors] = useState<Array<{line: number, message: string}>>([]);
   const [terminalOutput, setTerminalOutput] = useState<string>('');
+  const [hasChecked, setHasChecked] = useState<boolean>(false);
 
   const expectedCode = `module sui_garage::car_factory {
     use std::string::{String};
@@ -202,6 +203,7 @@ module sui_garage::car_factory {
     setErrors([]);
     setFeedback('');
     setTerminalOutput('');
+    setHasChecked(true);
     
     const lines = code.split('\n');
     const newErrors: Array<{line: number, message: string}> = [];
@@ -240,12 +242,16 @@ module sui_garage::car_factory {
       setErrors(newErrors);
       setFeedback('Build Failed');
       setIsCorrect(false);
-      setTerminalOutput('return rand % dnaModulus');
+      // Format errors in red
+      const errorOutput = newErrors.map(err => 
+        `Line ${err.line}: ${err.message}`
+      ).join('\n');
+      setTerminalOutput(errorOutput);
     } else if (userCode === expected) {
       setFeedback('Build Successful');
       setIsCorrect(true);
       setErrors([]);
-      setTerminalOutput('✓ Build completed successfully!\n\nmodule sui_garage::car_factory compiled.');
+      setTerminalOutput('✓ Build completed successfully!\n\n🎉 Congratulations! Your code is correct!\n\nmodule sui_garage::car_factory compiled.');
     } else {
       setErrors([{
         line: 1,
@@ -253,7 +259,7 @@ module sui_garage::car_factory {
       }]);
       setFeedback('Build Failed');
       setIsCorrect(false);
-      setTerminalOutput('✗ Compilation failed. Check your code structure.');
+      setTerminalOutput('Line 1: syntax error: check your code structure');
     }
     
     // Update error decorations after state change
@@ -274,6 +280,7 @@ module sui_garage::car_factory {
     setFeedback('');
     setIsCorrect(false);
     setTerminalOutput('');
+    setHasChecked(false);
     if (editorRef.current && monacoRef.current) {
       monacoRef.current.editor.setModelMarkers(editorRef.current.getModel()!, 'moveErrors', []);
     }
@@ -366,7 +373,7 @@ module sui_garage::car_factory {
               </div>
               <div className="terminal-content">
                 {terminalOutput ? (
-                  <pre className="terminal-text">{terminalOutput}</pre>
+                  <pre className={`terminal-text ${!isCorrect && hasChecked ? 'terminal-error' : ''}`}>{terminalOutput}</pre>
                 ) : (
                   <span className="terminal-placeholder">Run your code to see output...</span>
                 )}
@@ -379,10 +386,17 @@ module sui_garage::car_factory {
                   <span className="btn-icon">💡</span>
                   Show me the answer
                 </button>
-                <button className="btn-try-again" onClick={tryAgain}>
-                  <span className="btn-icon">🔄</span>
-                  Try Again
-                </button>
+                {!hasChecked ? (
+                  <button className="btn-check-answer" onClick={checkAnswer}>
+                    <span className="btn-icon">✓</span>
+                    Check Answer
+                  </button>
+                ) : !isCorrect ? (
+                  <button className="btn-try-again" onClick={tryAgain}>
+                    <span className="btn-icon">🔄</span>
+                    Try Again
+                  </button>
+                ) : null}
               </div>
               <div className="footer-right">
                 <button className="btn-next-chapter" disabled={!isCorrect}>Next Chapter →</button>
