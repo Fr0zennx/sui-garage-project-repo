@@ -671,7 +671,7 @@ class InfiniteGridMenu {
       ctx.font = 'bold 120px Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'bottom';
-      ctx.fillText(`${i + 1}`, x + cellSize / 2, y + cellSize - 40);
+      ctx.fillText(`${i}`, x + cellSize / 2, y + cellSize - 40);
     });
 
     gl.bindTexture(gl.TEXTURE_2D, this.tex);

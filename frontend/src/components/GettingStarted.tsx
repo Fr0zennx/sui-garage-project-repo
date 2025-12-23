@@ -11,7 +11,7 @@ function GettingStarted({ onClose }: GettingStartedProps) {
     {
       image: '',
       link: '#network',
-      title: 'Network',
+      title: 'Sui Garage',
       description: 'Currently connected to Sui\'s testing environment'
     },
     {

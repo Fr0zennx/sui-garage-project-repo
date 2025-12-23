@@ -18,11 +18,11 @@ interface Chapter {
 
 const chapters: Chapter[] = [
   {
-    id: 1,
-    title: "Chapter 1: Building the Chassis (Modules & Move Basics)",
+    id: 0,
+    title: "Sui Garage",
     description: (
       <>
-        <h2>Chapter 1: Building the Chassis (Modules & Move Basics)</h2>
+        <h2>Sui Garage</h2>
         <p>
           Welcome, Mechanic! You are about to embark on a journey to build the most advanced automotive empire on the Sui blockchain. In this garage, we don't just build cars; we create digital assets that you truly own.
         </p>
