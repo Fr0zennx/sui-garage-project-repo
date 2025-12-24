@@ -2,6 +2,7 @@ import { useCurrentAccount } from '@mysten/dapp-kit';
 import { useState } from 'react';
 import LessonView from './LessonView';
 import CharacterCardView from './CharacterCardView';
+import NFTVisualOwnershipView from './NFTVisualOwnershipView';
 import ChromaGrid, { ChromaGridItem } from './ChromaGrid';
 import { profileStaticData } from '../data/profileData';
 import './Profile.css';
@@ -14,6 +15,7 @@ function Profile({ onClose }: ProfileProps) {
   const currentAccount = useCurrentAccount();
   const [showLesson, setShowLesson] = useState(false);
   const [showCharacterCard, setShowCharacterCard] = useState(false);
+  const [showNFTOwnership, setShowNFTOwnership] = useState(false);
 
   if (!currentAccount) {
     return null;
@@ -58,6 +60,8 @@ function Profile({ onClose }: ProfileProps) {
         handleClick = () => setShowLesson(true);
       } else if (item.id === 'status') {
         handleClick = () => setShowCharacterCard(true);
+      } else if (item.id === 'wallet') {
+        handleClick = () => setShowNFTOwnership(true);
       }
     }
 
@@ -117,6 +121,9 @@ function Profile({ onClose }: ProfileProps) {
 
       {/* Character Card View */}
       {showCharacterCard && <CharacterCardView onClose={() => setShowCharacterCard(false)} />}
+
+      {/* NFT Ownership View */}
+      {showNFTOwnership && <NFTVisualOwnershipView onClose={() => setShowNFTOwnership(false)} />}
     </div>
   );
 }

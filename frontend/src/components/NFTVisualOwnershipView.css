@@ -1,4 +1,4 @@
-.character-card-fullscreen {
+.nft-ownership-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -23,7 +23,15 @@
   }
 }
 
-.character-card-close-btn {
+.nft-ownership-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.nft-ownership-close-btn {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -42,19 +50,19 @@
   z-index: 10;
 }
 
-.character-card-close-btn:hover {
+.nft-ownership-close-btn:hover {
   background: rgba(255, 0, 0, 0.3);
   border-color: rgba(255, 0, 0, 0.5);
   transform: rotate(90deg);
 }
 
-.character-card-header-section {
+.nft-ownership-header {
   flex-shrink: 0;
   padding: 3rem 3rem 2rem 3rem;
   border-bottom: 1px solid rgba(30, 144, 255, 0.2);
 }
 
-.character-card-title {
+.nft-ownership-header h1 {
   color: #fff;
   font-size: 2.5rem;
   margin: 0;
@@ -66,7 +74,7 @@
   letter-spacing: 1px;
 }
 
-.character-card-tabs {
+.nft-ownership-tabs {
   flex-shrink: 0;
   display: flex;
   gap: 0.5rem;
@@ -76,20 +84,20 @@
   background: rgba(10, 20, 40, 0.3);
 }
 
-.character-card-tabs::-webkit-scrollbar {
+.nft-ownership-tabs::-webkit-scrollbar {
   height: 4px;
 }
 
-.character-card-tabs::-webkit-scrollbar-track {
+.nft-ownership-tabs::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.character-card-tabs::-webkit-scrollbar-thumb {
+.nft-ownership-tabs::-webkit-scrollbar-thumb {
   background: rgba(30, 144, 255, 0.3);
   border-radius: 2px;
 }
 
-.character-card-tab {
+.nft-ownership-tab {
   flex-shrink: 0;
   padding: 0.75rem 1.5rem;
   background: rgba(30, 144, 255, 0.1);
@@ -103,141 +111,151 @@
   white-space: nowrap;
 }
 
-.character-card-tab:hover {
+.nft-ownership-tab:hover {
   background: rgba(30, 144, 255, 0.2);
   border-color: rgba(30, 144, 255, 0.4);
   color: rgba(255, 255, 255, 0.8);
 }
 
-.character-card-tab.active {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.3), rgba(30, 144, 255, 0.3));
+.nft-ownership-tab.active {
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.3) 0%, rgba(0, 191, 255, 0.2) 100%);
   border-color: rgba(30, 144, 255, 0.6);
-  color: #fff;
-  box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+  color: #4da6ff;
+  box-shadow: 0 0 20px rgba(30, 144, 255, 0.2);
 }
 
-.character-card-main-content {
+.nft-ownership-content {
   flex: 1;
+  padding: 3rem;
   overflow-y: auto;
-  overflow-x: hidden;
-  padding: 2rem 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.character-card-chapter-content {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
   line-height: 1.8;
 }
 
-.character-card-chapter-content h3 {
-  color: #fff;
+.nft-ownership-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.nft-ownership-content::-webkit-scrollbar-track {
+  background: rgba(30, 144, 255, 0.1);
+  border-radius: 5px;
+}
+
+.nft-ownership-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(30, 144, 255, 0.6), rgba(0, 191, 255, 0.6));
+  border-radius: 5px;
+}
+
+.nft-ownership-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(30, 144, 255, 0.8), rgba(0, 191, 255, 0.8));
+}
+
+.nft-ownership-content h3 {
   font-size: 1.8rem;
-  margin: 1.5rem 0 1rem 0;
-  font-weight: 600;
+  margin: 2rem 0 1rem 0;
   background: linear-gradient(135deg, #4da6ff 0%, #1e90ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 600;
 }
 
-.character-card-chapter-content h4 {
-  color: #4da6ff;
+.nft-ownership-content h4 {
   font-size: 1.2rem;
-  margin: 1.5rem 0 0.75rem 0;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.character-card-chapter-content p {
-  margin: 1rem 0;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.character-card-chapter-content strong {
+  margin: 1.5rem 0 1rem 0;
   color: #4da6ff;
   font-weight: 600;
 }
 
-.character-card-chapter-content ul {
+.nft-ownership-content p {
   margin: 1rem 0;
-  padding-left: 2rem;
-  list-style: none;
-}
-
-.character-card-chapter-content li {
-  margin: 0.75rem 0;
-  padding-left: 1.5rem;
-  position: relative;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.character-card-chapter-content li:before {
+.nft-ownership-content ul {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.nft-ownership-content li {
+  margin: 0.8rem 0;
+  color: rgba(255, 255, 255, 0.7);
+  list-style: none;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.nft-ownership-content li:before {
   content: '▸';
   position: absolute;
   left: 0;
-  color: #4da6ff;
+  color: #1e90ff;
   font-weight: bold;
 }
 
-.character-card-chapter-content code {
+.nft-ownership-content code {
   background: rgba(30, 144, 255, 0.1);
-  border: 1px solid rgba(30, 144, 255, 0.2);
-  padding: 0.2rem 0.6rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 4px;
   color: #4da6ff;
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
 }
 
-.character-card-chapter-content pre {
-  background: rgba(10, 20, 40, 0.6);
-  border: 1px solid rgba(30, 144, 255, 0.2);
+.nft-ownership-content pre {
+  background: rgba(30, 144, 255, 0.1);
+  padding: 1rem;
   border-radius: 8px;
-  padding: 1.5rem;
   overflow-x: auto;
+  border-left: 3px solid #1e90ff;
   margin: 1.5rem 0;
-  color: #4da6ff;
+  font-family: 'Courier New', monospace;
   font-size: 0.85rem;
-  line-height: 1.6;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.character-card-chapter-content pre code {
+.nft-ownership-content pre code {
   background: none;
-  border: none;
   padding: 0;
   color: inherit;
 }
 
-.character-card-main-content::-webkit-scrollbar {
-  width: 8px;
+.nft-ownership-content strong {
+  color: #4da6ff;
+  font-weight: 600;
 }
 
-.character-card-main-content::-webkit-scrollbar-track {
-  background: rgba(30, 144, 255, 0.05);
-}
-
-.character-card-main-content::-webkit-scrollbar-thumb {
-  background: rgba(30, 144, 255, 0.3);
-  border-radius: 4px;
-}
-
-.character-card-main-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(30, 144, 255, 0.5);
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  .character-card-header-section {
-    padding: 2rem 1.5rem 1.5rem 1.5rem;
+  .nft-ownership-header {
+    padding: 2rem 1.5rem 1.5rem;
   }
 
-  .character-card-title {
-    font-size: 2rem;
+  .nft-ownership-header h1 {
+    font-size: 1.8rem;
   }
 
-  .character-card-main-content {
+  .nft-ownership-tabs {
+    padding: 1rem 1.5rem;
+  }
+
+  .nft-ownership-tab {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .nft-ownership-content {
     padding: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .nft-ownership-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .nft-ownership-content h4 {
+    font-size: 1rem;
   }
 }

@@ -2,68 +2,69 @@ export interface ProfileStaticData {
   id: string;
   label: string;
   description: string;
-  icon?: string; // URL to the image/icon
-  color?: string; // Hex color for glow effects
-  action?: 'lesson' | 'none';
+  icon: string;
+  color: string;
+  action?: string;
 }
 
 export const profileStaticData: ProfileStaticData[] = [
   {
     id: 'garage',
     label: 'Sui Garage',
-    description: 'Currently connected to Sui\'s testing environment',
-    icon: '', // Add your icon URL here
-    color: '#4facfe',
+    description: 'Your learning hub for Sui development',
+    icon: '🏗️',
+    color: '#FF6B9D',
     action: 'lesson'
   },
   {
     id: 'status',
     label: 'Character Card',
-    description: 'Your wallet connection is live and secure',
-    icon: '',
-    color: '#00f260',
+    description: 'Create your first NFT smart contract',
+    icon: '⚡',
+    color: '#4ECDC4',
     action: 'lesson'
   },
   {
     id: 'wallet',
-    label: 'Wallet Type',
-    description: 'Official Sui browser extension wallet',
-    icon: '',
-    color: '#f093fb'
+    label: 'NFT & Visual Ownership',
+    description: 'Learn about NFT creation and visual assets',
+    icon: '🎨',
+    color: '#1E90FF',
+    action: 'lesson'
   },
   {
     id: 'balance',
     label: 'Balance',
-    description: 'Total balance available in your wallet',
-    icon: '',
-    color: '#f5576c'
+    description: 'Your Sui token balance',
+    icon: '💰',
+    color: '#FFD700'
   },
   {
     id: 'transactions',
     label: 'Transactions',
-    description: 'Total number of transactions performed',
-    icon: '',
-    color: '#43e97b'
+    description: 'Your on-chain activities',
+    icon: '📊',
+    color: '#00FF88'
   },
   {
     id: 'nfts',
     label: 'NFTs Owned',
-    description: 'Digital collectibles held in your wallet',
-    icon: '',
-    color: '#fa709a'
+    description: 'Your digital collectibles',
+    icon: '🎨',
+    color: '#FF8C00'
   },
   {
     id: 'connected',
     label: 'Connected Since',
-    description: 'Date when you first connected this wallet',
-    icon: '',
-    color: '#a18cd1'
+    description: 'When you first connected',
+    icon: '⏰',
+    color: '#9370DB'
   },
   {
     id: 'activity',
     label: 'Last Activity',
-    description: 'Most recent interaction with the dApp',
-    icon: '',
-    color: '#fbc2eb'
+    description: 'Your most recent action',
+    icon: '📍',
+    color: '#FF4500'
   }
 ];
