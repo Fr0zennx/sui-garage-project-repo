@@ -311,8 +311,8 @@ function SpeedrunDashboard() {
         {!isAuthenticated && (
           <div className="water-title-container">
             <h1 className="water-title">
-              <span className="water-text">Speedrun</span>
               <span className="water-text">Sui</span>
+              <span className="water-text">Garage</span>
             </h1>
             <div className="water-wave"></div>
             <div className="water-droplets">
