@@ -4,6 +4,7 @@ import LessonView from './LessonView';
 import CharacterCardView from './CharacterCardView';
 import NFTVisualOwnershipView from './NFTVisualOwnershipView';
 import BalanceView from './BalanceView';
+import SuiCarView from './SuiCarView';
 import ChromaGrid, { ChromaGridItem } from './ChromaGrid';
 import { profileStaticData } from '../data/profileData';
 import './Profile.css';
@@ -18,6 +19,7 @@ function Profile({ onClose }: ProfileProps) {
   const [showCharacterCard, setShowCharacterCard] = useState(false);
   const [showNFTOwnership, setShowNFTOwnership] = useState(false);
   const [showBalance, setShowBalance] = useState(false);
+  const [showSuiCar, setShowSuiCar] = useState(false);
 
   if (!currentAccount) {
     return null;
@@ -66,6 +68,8 @@ function Profile({ onClose }: ProfileProps) {
         handleClick = () => setShowNFTOwnership(true);
       } else if (item.id === 'balance') {
         handleClick = () => setShowBalance(true);
+      } else if (item.id === 'transactions') {
+        handleClick = () => setShowSuiCar(true);
       }
     }
 
@@ -131,6 +135,9 @@ function Profile({ onClose }: ProfileProps) {
 
       {/* Balance View */}
       {showBalance && <BalanceView onClose={() => setShowBalance(false)} />}
+
+      {/* Sui Car View */}
+      {showSuiCar && <SuiCarView onClose={() => setShowSuiCar(false)} />}
     </div>
   );
 }

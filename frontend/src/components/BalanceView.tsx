@@ -168,6 +168,54 @@ function BalanceView({ onClose }: BalanceViewProps) {
           <li>Verifies that the hero's XP increased to 20 and HP decreased to 80.</li>
         </ul>
       `
+    },
+    {
+      title: 'Chapter 6: Deployment to SUI Testnet',
+      content: `
+        <h3>Deployment to SUI Testnet</h3>
+        
+        <p>After modeling data, implementing logic, and verifying your code with unit tests, the final step is <strong>Deployment</strong>. In SUI, publishing a contract converts your Move code into an on-chain package that anyone (or authorized users) can interact with.</p>
+        
+        <h4>The Core Concepts</h4>
+        <ul>
+          <li><strong>The Package Object:</strong> When you publish, SUI creates a special object called a <code>Package</code>. This package contains the compiled bytecode of your game module. It serves as the "source of truth" for your contract on the blockchain.</li>
+          <li><strong>SUI CLI:</strong> We use the Command Line Interface to communicate with the network. The <code>sui client publish</code> command handles the compilation, gas estimation, and submission all in one step.</li>
+          <li><strong>Gas Budget:</strong> Every on-chain operation costs gas. You must ensure your SUI wallet has enough Testnet SUI to cover the storage and execution fees. This is specified using the <code>--gas-budget</code> flag.</li>
+          <li><strong>The Move.toml:</strong> This file is critical as it defines your package name, version, and dependencies (like the SUI Framework). It must be present in your project root before publishing.</li>
+          <li><strong>Network Selection:</strong> The SUI CLI remembers which network you're targeting. You can switch between Devnet, Testnet, and Mainnet using <code>sui client switch</code>.</li>
+        </ul>
+        
+        <h4>Pre-Deployment Checklist</h4>
+        <p>Before executing the publish command, verify the following:</p>
+        <ul>
+          <li><strong>Active Environment:</strong> Confirm you're connected to the correct network (usually Testnet for development).</li>
+          <li><strong>Account Balance:</strong> Check that your account has sufficient Testnet SUI. You can request free funds from the SUI Faucet.</li>
+          <li><strong>Move.toml Configuration:</strong> Ensure your package name and dependencies are correctly specified.</li>
+          <li><strong>Code Compilation:</strong> Verify there are no syntax errors by running a local build first.</li>
+        </ul>
+        
+        <h4>Your Task</h4>
+        <p>Prepare your project for the real world by executing the following CLI steps:</p>
+        
+        <h5>Step 1: Verify Active Network</h5>
+        <pre><code>sui client active-env</code></pre>
+        <p>This command displays the currently active network (e.g., testnet). If it shows a different network, use <code>sui client switch --env testnet</code> to switch.</p>
+        
+        <h5>Step 2: Check Your Balance</h5>
+        <pre><code>sui client balance</code></pre>
+        <p>This displays your Testnet SUI balance. If you have insufficient funds (less than 1 SUI), visit the <a href="https://faucet.testnet.sui.io/" target="_blank">SUI Testnet Faucet</a> to request free tokens.</p>
+        
+        <h5>Step 3: Publish Your Contract</h5>
+        <pre><code>sui client publish --gas-budget 100000000</code></pre>
+        <p>The <code>--gas-budget</code> flag specifies the maximum SUI you're willing to spend (in MIST units; 1 SUI = 1,000,000,000 MIST). A budget of 100,000,000 (0.1 SUI) is typically sufficient for small packages.</p>
+        
+        <h4>After Deployment</h4>
+        <ul>
+          <li><strong>Package ID:</strong> The CLI will return a Package ID (a long hex string). Save this! You'll need it to interact with your contract on-chain.</li>
+          <li><strong>Transaction Hash:</strong> You'll also receive a transaction digest. You can view the transaction on <a href="https://suiscan.xyz/" target="_blank">Suiscan</a> by pasting the digest into the search bar.</li>
+          <li><strong>Verify on Suiscan:</strong> Search for your Package ID on Suiscan to inspect the published modules, their functions, and type definitions.</li>
+        </ul>
+      `
     }
   ];
 

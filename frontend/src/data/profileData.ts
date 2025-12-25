@@ -42,10 +42,11 @@ export const profileStaticData: ProfileStaticData[] = [
   },
   {
     id: 'transactions',
-    label: 'Transactions',
+    label: 'Sui Car',
     description: 'Your on-chain activities',
     icon: '📊',
-    color: '#00FF88'
+    color: '#00FF88',
+    action: 'lesson'
   },
   {
     id: 'nfts',
