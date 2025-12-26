@@ -5,6 +5,7 @@ import CharacterCardView from './CharacterCardView';
 import NFTVisualOwnershipView from './NFTVisualOwnershipView';
 import BalanceView from './BalanceView';
 import SuiCarView from './SuiCarView';
+import SuiGalleryView from './SuiGalleryView';
 import ChromaGrid, { ChromaGridItem } from './ChromaGrid';
 import { profileStaticData } from '../data/profileData';
 import './Profile.css';
@@ -20,6 +21,7 @@ function Profile({ onClose }: ProfileProps) {
   const [showNFTOwnership, setShowNFTOwnership] = useState(false);
   const [showBalance, setShowBalance] = useState(false);
   const [showSuiCar, setShowSuiCar] = useState(false);
+  const [showSuiGallery, setShowSuiGallery] = useState(false);
 
   if (!currentAccount) {
     return null;
@@ -70,6 +72,8 @@ function Profile({ onClose }: ProfileProps) {
         handleClick = () => setShowBalance(true);
       } else if (item.id === 'transactions') {
         handleClick = () => setShowSuiCar(true);
+      } else if (item.id === 'nfts') {
+        handleClick = () => setShowSuiGallery(true);
       }
     }
 
@@ -138,6 +142,9 @@ function Profile({ onClose }: ProfileProps) {
 
       {/* Sui Car View */}
       {showSuiCar && <SuiCarView onClose={() => setShowSuiCar(false)} />}
+
+      {/* Sui Gallery View */}
+      {showSuiGallery && <SuiGalleryView onClose={() => setShowSuiGallery(false)} />}
     </div>
   );
 }

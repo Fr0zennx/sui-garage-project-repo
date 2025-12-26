@@ -50,10 +50,11 @@ export const profileStaticData: ProfileStaticData[] = [
   },
   {
     id: 'nfts',
-    label: 'NFTs Owned',
+    label: 'Sui Gallery',
     description: 'Your digital collectibles',
     icon: '🎨',
-    color: '#FF8C00'
+    color: '#FF8C00',
+    action: 'lesson'
   },
   {
     id: 'connected',
