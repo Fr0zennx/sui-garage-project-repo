@@ -1,241 +1,158 @@
 import { 
   useCurrentAccount, 
-  useSignAndExecuteTransaction,
   ConnectButton,
   useDisconnectWallet
 } from '@mysten/dapp-kit';
-import { Transaction } from '@mysten/sui/transactions';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import React from 'react';
-import { VscHome, VscArchive, VscAccount, VscSettingsGear } from 'react-icons/vsc';
-import ProjectTabs from './ProjectTabs';
-import LightRays from './LightRays';
-import Particles from './Particles';
-import Dock from './Dock';
-import GlassIcons from './GlassIcons';
+import { VscAccount } from 'react-icons/vsc';
+import { TracingBeam } from './ui/tracing-beam';
 import Profile from './Profile';
-import Magnet from './Magnet';
 import SlideArrowButton from './SlideArrowButton';
 import GettingStarted from './GettingStarted';
-import LessonView from './LessonView';
 import './SpeedrunDashboard.css';
 
-// Move module's package ID - Will be written here after deployment
-const PACKAGE_ID = import.meta.env.VITE_PACKAGE_ID || 'YOUR_PACKAGE_ID_HERE';
-
-// LocalStorage key
-const AUTH_STORAGE_KEY = 'speedrun_sui_authenticated_users';
+// Content Data
+const contentData = [
+  {
+    title: "Level 1: Sui Garage Development",
+    description: (
+      <>
+        <p>
+          Sui Speedrun is an interactive learning platform designed to help developers 
+          master the Sui blockchain through hands-on projects. Each level introduces 
+          new concepts and challenges that build upon your knowledge progressively.
+        </p>
+        <p>
+          Start your journey by connecting your wallet and completing the first 
+          transaction. This will authenticate your account and unlock access to 
+          all learning modules.
+        </p>
+        <p>
+          The platform covers everything from basic Move programming to advanced 
+          topics like NFTs, object ownership, and decentralized applications on Sui.
+        </p>
+      </>
+    ),
+    badge: "Introduction",
+    image:
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=3432&auto=format&fit=crop",
+  },
+  {
+    title: "Level 2: Character Card",
+    description: (
+      <>
+        <p>
+          Sui Move is a powerful programming language designed for building secure 
+          and efficient smart contracts. It provides unique features like object-centric 
+          design and strong ownership semantics that make blockchain development safer.
+        </p>
+        <p>
+          Through our structured curriculum, you'll learn how to create, deploy, and 
+          interact with Move modules on the Sui blockchain. Each lesson includes 
+          practical examples and real-world use cases.
+        </p>
+      </>
+    ),
+   
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=3472&auto=format&fit=crop",
+  },
+  {
+    title: "Level 3: NFT & Visual Ownership",
+    description: (
+      <>
+        <p>
+          Put your knowledge into practice by building complete decentralized applications. 
+          Learn how to design smart contracts, manage state, handle transactions, and 
+          create user-friendly interfaces for blockchain interactions.
+        </p>
+        <p>
+          Our project-based approach ensures you gain practical experience with real-world 
+          scenarios, from simple token transfers to complex NFT marketplaces and gaming 
+          applications.
+        </p>
+      </>
+    ),
+   
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=3540&auto=format&fit=crop",
+  },
+  {
+    title: "Level 4: Battle & Level Up",
+    description: (
+      <>
+        <p>
+          Dive deep into advanced Sui concepts including object capabilities, dynamic fields, 
+          and composable smart contracts. Learn how to optimize gas costs and implement 
+          best practices for security and efficiency.
+        </p>
+        <p>
+          Complete all levels to become a certified Sui developer and join the growing 
+          community of blockchain innovators building the future of decentralized technology.
+        </p>
+      </>
+    ),
+    
+    image:
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=3540&auto=format&fit=crop",
+  },
+  {
+    title: "Level 5: Sui Car",
+    description: (
+      <>
+        <p>
+          Build dynamic NFT systems with programmable transactions. Learn how to create
+          upgradeable objects, implement custom transfer policies, and manage complex
+          ownership structures on the Sui blockchain.
+        </p>
+        <p>
+          Master the art of building interactive NFT collections with real-time state
+          management and advanced object composition techniques.
+        </p>
+      </>
+    ),
+    
+    image:
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=3540&auto=format&fit=crop",
+  },
+  {
+    title: "Level 6: Sui Gallery",
+    description: (
+      <>
+        <p>
+          Create a complete NFT marketplace with advanced features including auctions,
+          royalties, and dynamic pricing. Implement sophisticated smart contract patterns
+          and build a production-ready decentralized application.
+        </p>
+        <p>
+          Graduate as a Sui expert by deploying your own NFT gallery with full marketplace
+          functionality and community features.
+        </p>
+      </>
+    ),
+    
+    image:
+      "https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=3540&auto=format&fit=crop",
+  },
+];
 
 function SpeedrunDashboard() {
   const currentAccount = useCurrentAccount();
   const { mutate: disconnectWallet } = useDisconnectWallet();
-  const { mutate: signAndExecuteTransaction } = useSignAndExecuteTransaction();
-  const [transactionStatus, setTransactionStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [transactionDigest, setTransactionDigest] = useState<string>('');
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [showProfile, setShowProfile] = useState<boolean>(false);
-  const [showGettingStarted, setShowGettingStarted] = useState<boolean>(false);
-  const [showLesson, setShowLesson] = useState<boolean>(false);
-  const wrapRef = React.useRef<HTMLDivElement>(null);
+  const [showProfile, setShowProfile] = useState(false);
+  const [showGettingStarted, setShowGettingStarted] = useState(false);
 
-  // Holographic tilt effect
-  useEffect(() => {
-    if (isAuthenticated || currentAccount) return;
-    
-    const card = wrapRef.current;
-    if (!card) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
-      
-      const percentX = (x / rect.width) * 100;
-      const percentY = (y / rect.height) * 100;
-      
-      card.style.setProperty('--pointer-x', `${percentX}%`);
-      card.style.setProperty('--pointer-y', `${percentY}%`);
-      card.style.setProperty('--rotate-x', `${rotateY}deg`);
-      card.style.setProperty('--rotate-y', `${rotateX}deg`);
-      card.style.setProperty('--background-y', `${percentY}%`);
-    };
-
-    const handleMouseLeave = () => {
-      card.style.setProperty('--rotate-x', '0deg');
-      card.style.setProperty('--rotate-y', '0deg');
-    };
-
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [isAuthenticated, currentAccount]);
-
-  // Check user authentication status (from localStorage)
-  useEffect(() => {
-    if (currentAccount?.address) {
-      const authenticatedUsers = getAuthenticatedUsers();
-      const isUserAuthenticated = authenticatedUsers.includes(currentAccount.address);
-      setIsAuthenticated(isUserAuthenticated);
-      
-      if (isUserAuthenticated) {
-        console.log('[AUTH] User was previously authenticated:', currentAccount.address);
-      }
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, [currentAccount?.address]);
-
-  // Get authenticated users from localStorage
-  const getAuthenticatedUsers = (): string[] => {
-    try {
-      const stored = localStorage.getItem(AUTH_STORAGE_KEY);
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  };
-
-  // Save user as authenticated
-  const saveAuthenticatedUser = (address: string) => {
-    const users = getAuthenticatedUsers();
-    if (!users.includes(address)) {
-      users.push(address);
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(users));
-    }
-  };
-
-  // Call init_speedrun function and authenticate user
-  const handleInitSpeedrun = async () => {
-    if (!currentAccount) {
-      alert('Please connect your wallet first!');
-      return;
-    }
-
-    setTransactionStatus('loading');
-    
-    try {
-      const tx = new Transaction();
-      
-      // Call Move function
-      tx.moveCall({
-        target: `${PACKAGE_ID}::initializer::init_speedrun`,
-        arguments: [],
-      });
-
-      signAndExecuteTransaction(
-        {
-          transaction: tx,
-        },
-        {
-          onSuccess: (result) => {
-            console.log('[TRANSACTION] Successful:', result);
-            console.log('[TRANSACTION] Digest:', result.digest);
-            
-            // Check transaction result
-            // In the new API, result.effects is automatically parsed
-            const isSuccess = result.effects?.status?.status === 'success';
-            
-            if (isSuccess) {
-              console.log('[AUTH] User successfully authenticated');
-              
-              // Update UI state
-              setTransactionStatus('success');
-              setTransactionDigest(result.digest);
-              setIsAuthenticated(true);
-              
-              // Save user to localStorage
-              saveAuthenticatedUser(currentAccount.address);
-              
-              // Success notification
-              alert('Congratulations! You have been successfully authenticated and sent your first transaction to the Sui blockchain.');
-            } else {
-              console.error('[TRANSACTION] Failed:', result.effects?.status);
-              setTransactionStatus('error');
-              alert('Transaction was rejected by the blockchain.');
-            }
-          },
-          onError: (error) => {
-            console.error('[TRANSACTION] Error:', error);
-            setTransactionStatus('error');
-            alert('Transaction failed: ' + error.message);
-          },
-        }
-      );
-    } catch (error) {
-      console.error('[TRANSACTION] Creation error:', error);
-      setTransactionStatus('error');
-      alert('Error creating transaction: ' + (error as Error).message);
-    }
-  };
-
-  // Clear authentication state when disconnecting wallet
   const handleDisconnect = () => {
     disconnectWallet();
-    setIsAuthenticated(false);
-    setTransactionStatus('idle');
-    setTransactionDigest('');
   };
 
-  const dockItems = [
-    { icon: <VscHome size={18} />, label: 'Home', onClick: () => alert('Home!') },
-    { icon: <VscArchive size={18} />, label: 'Archive', onClick: () => alert('Archive!') },
-    { icon: <VscAccount size={18} />, label: 'Profile', onClick: () => alert('Profile!') },
-    { icon: <VscSettingsGear size={18} />, label: 'Settings', onClick: () => alert('Settings!') },
-  ];
-
-  const glassIconItems = [
-    { 
-      icon: <VscAccount size={20} />, 
-      color: 'blue', 
-      label: 'Profile', 
-      onClick: () => setShowProfile(true)
-    },
-    { 
-      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-        <polyline points="16 17 21 12 16 7"></polyline>
-        <line x1="21" y1="12" x2="9" y2="12"></line>
-      </svg>, 
-      color: 'red', 
-      label: 'Disconnect', 
-      onClick: handleDisconnect
-    },
-  ];
-
   return (
-    <>
-      {/* Getting Started Page - Full screen tab-like view */}
-      {showGettingStarted ? (
-        <GettingStarted 
-          onClose={() => setShowGettingStarted(false)} 
-          onStartSuiGarage={() => {
-            setShowGettingStarted(false);
-            setShowLesson(true);
-          }}
-        />
-      ) : /* Lesson View - Full screen tab-like view */
-      showLesson ? (
-        <LessonView onClose={() => setShowLesson(false)} />
-      ) : /* Profile Page - Full screen tab-like view */
-      showProfile && currentAccount ? (
-        <Profile onClose={() => setShowProfile(false)} />
-      ) : (
-        <div className="dashboard-container">
-      {/* Sui Logo - Outside Banner */}
-      <div className="floating-logo">
-        <div className="sui-logo-container">
-          <div className="sui-logo-glow"></div>
-          <div className="sui-logo-wrapper">
+    <div className="dashboard-container">
+      {/* Header */}
+      <header className="dashboard-header">
+        <div className="header-content">
+          <div className="logo-section">
             <img 
               src="https://cryptologos.cc/logos/sui-sui-logo.png"
               alt="Sui Logo"
@@ -244,244 +161,91 @@ function SpeedrunDashboard() {
                 const target = e.target as HTMLImageElement;
                 if (target.src.includes('cryptologos')) {
                   target.src = 'https://s2.coinmarketcap.com/static/img/coins/200x200/20947.png';
-                } else if (target.src.includes('coinmarketcap')) {
-                  target.src = 'https://avatars.githubusercontent.com/u/102524681?s=400';
-                } else {
-                  target.src = '/sui-logo.svg';
                 }
               }}
             />
+            <h1 className="logo-text">Sui Garage</h1>
           </div>
-          <div className="sui-logo-ring"></div>
-        </div>
-      </div>
-
-      {/* Top Banner */}
-      <div className="top-banner">
-        <div className="banner-content">
-          {/* Connect/Glass Icons */}
-          <div className="banner-actions">
+          
+          <div className="header-actions">
             {!currentAccount ? (
-              <ConnectButton className="banner-connect-btn" />
+              <ConnectButton className="connect-btn" />
             ) : (
-              <div className="banner-wallet-section">
-                <GlassIcons items={glassIconItems} className="banner-glass-icons" />
-                <Magnet padding={30} disabled={false} magnetStrength={5}>
-                  <div className="wallet-address-badge">
-                    <span className="wallet-address-text">
-                      {currentAccount.address.substring(0, 6)}...{currentAccount.address.substring(currentAccount.address.length - 4)}
-                    </span>
-                  </div>
-                </Magnet>
+              <div className="wallet-info">
+                <button className="profile-btn" onClick={() => setShowProfile(true)}>
+                  <VscAccount size={18} />
+                  Profile
+                </button>
+                <div className="wallet-badge">
+                  <VscAccount size={18} />
+                  <span className="wallet-address">
+                    {currentAccount.address.substring(0, 6)}...{currentAccount.address.substring(currentAccount.address.length - 4)}
+                  </span>
+                </div>
+                <button className="disconnect-btn" onClick={handleDisconnect}>
+                  Disconnect
+                </button>
               </div>
             )}
           </div>
         </div>
-      </div>
+      </header>
 
-      <Particles
-        particleCount={150}
-        particleSpread={12}
-        speed={0.05}
-        particleColors={['#00bfff', '#1e90ff', '#00d4ff', '#4da6ff']}
-        moveParticlesOnHover={false}
-        alphaParticles={true}
-        particleBaseSize={80}
-        sizeRandomness={0.6}
-        cameraDistance={25}
-        disableRotation={false}
-        className="dashboard-particles"
-      />
-      
-      <LightRays
-        raysOrigin="top-center"
-        raysColor="#00ffff"
-        raysSpeed={1.5}
-        lightSpread={0.8}
-        rayLength={1.2}
-        followMouse={true}
-        mouseInfluence={0.1}
-        noiseAmount={0.1}
-        distortion={0.05}
-        className="dashboard-background-rays"
-      />
-      
-      <div className="dashboard-content">
-        {/* Main Title with Water Theme - Only show when not authenticated */}
-        {!isAuthenticated && (
-          <div className="water-title-container">
-            <h1 className="water-title">
-              <span className="water-text">Sui</span>
-              <span className="water-text">Garage</span>
-            </h1>
-            <div className="water-wave"></div>
-            <div className="water-droplets">
-              <div className="droplet"></div>
-              <div className="droplet"></div>
-              <div className="droplet"></div>
-            </div>
-            <div className="get-started-button">
-              <SlideArrowButton 
-                text="Get Started" 
-                primaryColor="#00bcd4"
-                onClick={() => setShowGettingStarted(true)}
-              />
-            </div>
-          </div>
-        )}
+      {/* Main Content */}
+      <main className="main-content">
+        {/* Get Started Button */}
+        <div className="get-started-section">
+          <h2 className="welcome-title">Welcome to Sui Garage</h2>
+          <p className="welcome-subtitle"></p>
+          <SlideArrowButton 
+            text="Get Started" 
+            primaryColor="#00bcd4"
+            onClick={() => setShowGettingStarted(true)}
+          />
+        </div>
 
-        <div 
-          className={`dashboard-card ${isAuthenticated ? 'expanded' : ''} ${!isAuthenticated && !currentAccount ? 'holographic-card' : ''}`}
-          ref={!isAuthenticated && !currentAccount ? wrapRef : null}
-        >
-          {/* Holographic effects - only when not authenticated and no wallet */}
-          {!isAuthenticated && !currentAccount && (
-            <>
-              <div className="holo-behind" />
-              <div className="holo-shine" />
-              <div className="holo-glare" />
-            </>
-          )}
+        <TracingBeam className="tracing-beam-wrapper">
+          <div className="content-wrapper">
+            {contentData.map((item, index) => (
+              <div key={`content-${index}`} className="content-item">
+                <h2 className="content-badge">
+                  {item.badge}
+                </h2>
 
-          {/* Header - Always visible */}
-          <div className="dashboard-header">
-            <h1>{isAuthenticated ? 'Speedrun Sui' : 'Welcome to Sui'}</h1>
-            <p className="subtitle">
-              {isAuthenticated 
-                ? 'Master Sui by completing each project challenge' 
-                : 'Welcome to the Sui Blockchain'
-              }
-            </p>
-          </div>
+                <p className="content-title">
+                  {item.title}
+                </p>
 
-          {/* Connect Button - MOVED TO TOP RIGHT */}
-          
-          {!isAuthenticated && currentAccount && (
-          <div className="wallet-section">
-              <div className="wallet-connected">
-                <h2>Wallet Connected</h2>
-              <div className="account-info">
-                <p className="account-label">Address:</p>
-                <p className="account-address">{currentAccount.address}</p>
-              </div>
-              <button 
-                className="disconnect-button"
-                onClick={handleDisconnect}
-              >
-                Disconnect Wallet
-              </button>
-            </div>
-          </div>
-          )}
-
-          {/* Compact Wallet Info - Show in top corner when authenticated */}
-          {isAuthenticated && currentAccount && (
-            <div className="compact-wallet-info">
-              <div className="wallet-badge">
-                <span className="wallet-address-short">
-                  {currentAccount.address.substring(0, 6)}...{currentAccount.address.substring(currentAccount.address.length - 4)}
-                </span>
-              </div>
-              <button 
-                className="disconnect-button-compact"
-                onClick={handleDisconnect}
-                title="Disconnect Wallet"
-              >
-                ✕
-              </button>
-            </div>
-          )}
-
-          {/* Authentication Status - Success toast message */}
-          {currentAccount && isAuthenticated && transactionDigest && transactionStatus === 'success' && (
-            <div className="auth-success-toast">
-              <span className="toast-icon">✓</span>
-              <div className="toast-content">
-                <strong>Success</strong>
-                <span>Authentication completed</span>
-              </div>
-              <a 
-                href={`https://suiscan.xyz/testnet/tx/${transactionDigest}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="toast-link"
-                title="View transaction"
-              >
-                ↗
-              </a>
-            </div>
-          )}
-
-          {/* 8 Project Tabs - Show when authenticated */}
-          {currentAccount && isAuthenticated && (
-            <ProjectTabs />
-          )}
-
-          {/* Speedrun Initiation - Only for unauthenticated users */}
-          {!isAuthenticated && currentAccount && (
-            <div className="speedrun-section">
-              <h2>Start Speedrun</h2>
-              <p>
-                By completing this transaction, you will prove that you have successfully 
-                connected to the Sui network and that your wallet is active.
-              </p>
-              
-              <button 
-                className="speedrun-button"
-                onClick={handleInitSpeedrun}
-                disabled={transactionStatus === 'loading'}
-              >
-                {transactionStatus === 'loading' ? 'Sending Transaction...' : 'Start Speedrun'}
-              </button>
-
-              {/* Transaction Status */}
-              {transactionStatus === 'success' && (
-                <div className="status-message success">
-                  <h3>Success!</h3>
-                  <p>Speedrun successfully started</p>
-                  {transactionDigest && (
-                    <div className="transaction-link">
-                      <p>Transaction ID:</p>
-                      <a 
-                        href={`https://suiscan.xyz/testnet/tx/${transactionDigest}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {transactionDigest.substring(0, 20)}...
-                      </a>
-                    </div>
+                <div className="content-description">
+                  {item?.image && (
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="content-image"
+                    />
                   )}
+                  {item.description}
                 </div>
-              )}
-
-              {transactionStatus === 'error' && (
-                <div className="status-message error">
-                  <h3>Error</h3>
-                  <p>Transaction failed. Please try again.</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Information - Only show if not authenticated */}
-          {!isAuthenticated && (
-          <div className="info-section">
-            <h3>How It Works</h3>
-            <ol>
-              <li>Connect your wallet (Sui Wallet recommended)</li>
-              <li>Click the "Start Speedrun" button</li>
-              <li>Approve the transaction from your wallet</li>
-              <li>Success! You have sent your first transaction to the Sui blockchain</li>
-            </ol>
+              </div>
+            ))}
           </div>
-          )}
-        </div>
-      </div>
-        </div>
+        </TracingBeam>
+      </main>
+
+      {/* Profile Modal */}
+      {showProfile && currentAccount && (
+        <Profile onClose={() => setShowProfile(false)} />
       )}
-    </>
+
+      {/* Getting Started Modal */}
+      {showGettingStarted && (
+        <GettingStarted 
+          onClose={() => setShowGettingStarted(false)}
+          onStartSuiGarage={() => setShowGettingStarted(false)}
+        />
+      )}
+    </div>
   );
 }
 
 export default SpeedrunDashboard;
-
