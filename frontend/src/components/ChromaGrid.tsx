@@ -102,6 +102,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
         <article
           key={i}
           className="chroma-card"
+          data-card-id={c.id}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c)}
           style={{

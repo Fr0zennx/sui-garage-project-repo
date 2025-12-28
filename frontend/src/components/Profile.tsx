@@ -39,10 +39,6 @@ function Profile({ onClose }: ProfileProps) {
     switch (id) {
       case 'balance':
         return '-- SUI';
-      case 'connected':
-        return new Date().toLocaleDateString();
-      case 'activity':
-        return 'Just now';
       case 'transactions':
         return '0';
       case 'nfts':

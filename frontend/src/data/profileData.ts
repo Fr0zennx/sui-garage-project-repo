@@ -10,7 +10,7 @@ export interface ProfileStaticData {
 export const profileStaticData: ProfileStaticData[] = [
   {
     id: 'garage',
-    label: 'Sui Garage',
+    label: 'Level 1: Sui Garage Development',
     description: 'Your learning hub for Sui development',
     icon: '🏗️',
     color: '#FF6B9D',
@@ -18,7 +18,7 @@ export const profileStaticData: ProfileStaticData[] = [
   },
   {
     id: 'status',
-    label: 'Character Card',
+    label: 'Level 2: Character Card',
     description: 'Create your first NFT smart contract',
     icon: '⚡',
     color: '#4ECDC4',
@@ -26,7 +26,7 @@ export const profileStaticData: ProfileStaticData[] = [
   },
   {
     id: 'wallet',
-    label: 'NFT & Visual Ownership',
+    label: 'Level 3: NFT & Visual Ownership',
     description: 'Learn about NFT creation and visual assets',
     icon: '🎨',
     color: '#1E90FF',
@@ -34,7 +34,7 @@ export const profileStaticData: ProfileStaticData[] = [
   },
   {
     id: 'balance',
-    label: 'Battle & Level Up',
+    label: 'Level 4: Battle & Level Up',
     description: 'Your Sui token balance',
     icon: '💰',
     color: '#FFD700',
@@ -42,7 +42,7 @@ export const profileStaticData: ProfileStaticData[] = [
   },
   {
     id: 'transactions',
-    label: 'Sui Car',
+    label: 'Level 5: Sui Car',
     description: 'Your on-chain activities',
     icon: '📊',
     color: '#00FF88',
@@ -50,24 +50,10 @@ export const profileStaticData: ProfileStaticData[] = [
   },
   {
     id: 'nfts',
-    label: 'Sui Gallery',
+    label: 'Level 6: Sui Gallery',
     description: 'Your digital collectibles',
     icon: '🎨',
     color: '#FF8C00',
     action: 'lesson'
-  },
-  {
-    id: 'connected',
-    label: 'Connected Since',
-    description: 'When you first connected',
-    icon: '⏰',
-    color: '#9370DB'
-  },
-  {
-    id: 'activity',
-    label: 'Last Activity',
-    description: 'Your most recent action',
-    icon: '📍',
-    color: '#FF4500'
   }
 ];

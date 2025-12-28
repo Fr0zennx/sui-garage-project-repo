@@ -54,6 +54,44 @@
   gap: 1rem;
 }
 
+/* Hover Border Gradient Button Styles */
+.connect-gradient-btn,
+.profile-gradient-btn,
+.disconnect-gradient-btn {
+  border-radius: 8px;
+}
+
+.connect-btn-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.connect-btn-content button {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  padding: 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+}
+
+.profile-btn-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.disconnect-btn-content {
+  background: rgba(252, 129, 129, 0.2) !important;
+  color: #fca5a5;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid rgba(252, 129, 129, 0.5);
+}
+
 .connect-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -78,28 +116,6 @@
   gap: 0.75rem;
 }
 
-.profile-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: 1px solid rgba(102, 126, 234, 0.3);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-.profile-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-  background: linear-gradient(135deg, #7b8ff5 0%, #8659b0 100%);
-}
-
 .wallet-badge {
   display: flex;
   align-items: center;
@@ -114,23 +130,6 @@
 
 .wallet-address {
   font-family: monospace;
-}
-
-.disconnect-btn {
-  background: rgba(252, 129, 129, 0.2);
-  color: #fca5a5;
-  border: 1px solid rgba(252, 129, 129, 0.5);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.disconnect-btn:hover {
-  background: rgba(252, 129, 129, 0.3);
-  transform: translateY(-2px);
 }
 
 /* Main Content */
@@ -245,9 +244,15 @@
   }
 
   .wallet-badge,
-  .disconnect-btn,
-  .profile-btn {
+  .disconnect-gradient-btn,
+  .profile-gradient-btn,
+  .connect-gradient-btn {
     width: 100%;
+  }
+
+  .profile-btn-content,
+  .disconnect-btn-content,
+  .connect-btn-content {
     justify-content: center;
   }
 

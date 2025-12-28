@@ -48,7 +48,7 @@
 }
 
 .chroma-card:hover {
-  border-color: var(--card-border);
+  border-color: rgba(255, 0, 0, 0.8);
   transform: translateY(-2px);
 }
 
@@ -95,6 +95,11 @@
   font-weight: 600;
   color: #fff;
   letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.chroma-card:hover .chroma-card-label {
+  color: #ff0000;
 }
 
 .chroma-card-footer {
@@ -121,9 +126,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: linear-gradient(135deg, #4facfe 0%, #00f260 100%);
-  color: white;
-  border: none;
+  background: rgba(255, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 0, 0, 0.3);
   padding: 8px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -132,7 +137,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 600;
   font-size: 0.9rem;
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
   letter-spacing: 0.5px;
   z-index: 10;
 }
@@ -140,6 +145,10 @@
 .chroma-card:hover .chroma-card-button {
   opacity: 1;
   transform: translateY(0);
+  background: rgba(255, 0, 0, 0.8);
+  color: #fff;
+  border-color: rgba(255, 0, 0, 1);
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.6);
 }
 
 .chroma-card:hover .chroma-card-value.has-button {
@@ -155,3 +164,112 @@
   z-index: 0;
 }
 
+/* Level 2 - Character Card (Turuncu/Orange) */
+.chroma-card[data-card-id="status"]:hover {
+  border-color: rgba(255, 140, 0, 0.8);
+}
+
+.chroma-card[data-card-id="status"]:hover .chroma-card-label {
+  color: #ff8c00;
+}
+
+.chroma-card[data-card-id="status"] .chroma-card-button {
+  background: rgba(255, 140, 0, 0.1);
+  border-color: rgba(255, 140, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.2);
+}
+
+.chroma-card[data-card-id="status"]:hover .chroma-card-button {
+  background: rgba(255, 140, 0, 0.8);
+  color: #fff;
+  border-color: rgba(255, 140, 0, 1);
+  box-shadow: 0 4px 20px rgba(255, 140, 0, 0.6);
+}
+
+/* Level 3 - NFT & Visual Ownership (Sarı/Yellow) */
+.chroma-card[data-card-id="wallet"]:hover {
+  border-color: rgba(255, 215, 0, 0.8);
+}
+
+.chroma-card[data-card-id="wallet"]:hover .chroma-card-label {
+  color: #ffd700;
+}
+
+.chroma-card[data-card-id="wallet"] .chroma-card-button {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
+.chroma-card[data-card-id="wallet"]:hover .chroma-card-button {
+  background: rgba(255, 215, 0, 0.8);
+  color: #fff;
+  border-color: rgba(255, 215, 0, 1);
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.6);
+}
+
+/* Level 4 - Battle & Level Up (Yeşil/Green) */
+.chroma-card[data-card-id="balance"]:hover {
+  border-color: rgba(0, 255, 136, 0.8);
+}
+
+.chroma-card[data-card-id="balance"]:hover .chroma-card-label {
+  color: #00ff88;
+}
+
+.chroma-card[data-card-id="balance"] .chroma-card-button {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
+}
+
+.chroma-card[data-card-id="balance"]:hover .chroma-card-button {
+  background: rgba(0, 255, 136, 0.8);
+  color: #fff;
+  border-color: rgba(0, 255, 136, 1);
+  box-shadow: 0 4px 20px rgba(0, 255, 136, 0.6);
+}
+
+/* Level 5 - Sui Car (Camgöbeği/Cyan) */
+.chroma-card[data-card-id="transactions"]:hover {
+  border-color: rgba(0, 206, 209, 0.8);
+}
+
+.chroma-card[data-card-id="transactions"]:hover .chroma-card-label {
+  color: #00ced1;
+}
+
+.chroma-card[data-card-id="transactions"] .chroma-card-button {
+  background: rgba(0, 206, 209, 0.1);
+  border-color: rgba(0, 206, 209, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 206, 209, 0.2);
+}
+
+.chroma-card[data-card-id="transactions"]:hover .chroma-card-button {
+  background: rgba(0, 206, 209, 0.8);
+  color: #fff;
+  border-color: rgba(0, 206, 209, 1);
+  box-shadow: 0 4px 20px rgba(0, 206, 209, 0.6);
+}
+
+/* Level 6 - Sui Gallery (Mor/Purple) */
+.chroma-card[data-card-id="nfts"]:hover {
+  border-color: rgba(138, 43, 226, 0.8);
+}
+
+.chroma-card[data-card-id="nfts"]:hover .chroma-card-label {
+  color: #8a2be2;
+}
+
+.chroma-card[data-card-id="nfts"] .chroma-card-button {
+  background: rgba(138, 43, 226, 0.1);
+  border-color: rgba(138, 43, 226, 0.3);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
+}
+
+.chroma-card[data-card-id="nfts"]:hover .chroma-card-button {
+  background: rgba(138, 43, 226, 0.8);
+  color: #fff;
+  border-color: rgba(138, 43, 226, 1);
+  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.6);
+}

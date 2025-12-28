@@ -7,6 +7,7 @@ import { useState } from 'react';
 import React from 'react';
 import { VscAccount } from 'react-icons/vsc';
 import { TracingBeam } from './ui/tracing-beam';
+import { HoverBorderGradient } from './ui/hover-border-gradient';
 import Profile from './Profile';
 import SlideArrowButton from './SlideArrowButton';
 import GettingStarted from './GettingStarted';
@@ -169,22 +170,35 @@ function SpeedrunDashboard() {
           
           <div className="header-actions">
             {!currentAccount ? (
-              <ConnectButton className="connect-btn" />
+              <HoverBorderGradient
+                containerClassName="connect-gradient-btn"
+                className="connect-btn-content"
+              >
+                <ConnectButton />
+              </HoverBorderGradient>
             ) : (
               <div className="wallet-info">
-                <button className="profile-btn" onClick={() => setShowProfile(true)}>
+                <HoverBorderGradient
+                  containerClassName="profile-gradient-btn"
+                  className="profile-btn-content"
+                  onClick={() => setShowProfile(true)}
+                >
                   <VscAccount size={18} />
-                  Profile
-                </button>
+                  <span>Profile</span>
+                </HoverBorderGradient>
                 <div className="wallet-badge">
                   <VscAccount size={18} />
                   <span className="wallet-address">
                     {currentAccount.address.substring(0, 6)}...{currentAccount.address.substring(currentAccount.address.length - 4)}
                   </span>
                 </div>
-                <button className="disconnect-btn" onClick={handleDisconnect}>
-                  Disconnect
-                </button>
+                <HoverBorderGradient
+                  containerClassName="disconnect-gradient-btn"
+                  className="disconnect-btn-content"
+                  onClick={handleDisconnect}
+                >
+                  <span>Disconnect</span>
+                </HoverBorderGradient>
               </div>
             )}
           </div>
