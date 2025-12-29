@@ -224,12 +224,22 @@ function SpeedrunDashboard() {
 
       try {
         const response = await fetch(`/api/user-status?address=${currentAccount.address}`);
-        const result = await response.json();
-
+        
+        // Check if response is ok before parsing JSON
         if (!response.ok) {
-          throw new Error(result.error || 'Failed to fetch user status');
+          const errorText = await response.text();
+          console.error('API Error:', response.status, errorText);
+          throw new Error(`Failed to fetch user status: ${response.status}`);
         }
 
+        // Check if response has content before parsing
+        const text = await response.text();
+        if (!text) {
+          console.error('Empty response from API');
+          throw new Error('Empty response from server');
+        }
+
+        const result = JSON.parse(text);
         setUserStatus(result.data);
       } catch (error) {
         console.error('Error fetching user status:', error);
@@ -271,6 +281,7 @@ function SpeedrunDashboard() {
               <HoverBorderGradient
                 containerClassName="connect-gradient-btn"
                 className="connect-btn-content"
+                as="div"
               >
                 <ConnectButton />
               </HoverBorderGradient>

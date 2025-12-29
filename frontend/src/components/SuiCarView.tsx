@@ -14,33 +14,27 @@ function SuiCarView({ onClose }: SuiCarViewProps) {
     {
       title: 'Introduction',
       content: `
-        <p>Welcome to the <strong>Sui Garage</strong> development challenge. This curriculum is designed to transition developers from basic smart contract concepts to mastering the <strong>Sui Move</strong> object model.</p>
+        <h3>Project Setup and Development</h3>
+        <p>To begin the Character Card challenge, you will be working on a car game project. <strong>Crucially, all coding steps and logic implementations will take place within the <code>sources/car_game.move</code> file.</strong></p>
         
-        <p>Unlike legacy account-based blockchains, Sui operates on an <strong>Object-Centric</strong> paradigm. In this system, every asset—whether a car, a wheel, or a performance part—is a standalone, programmable entity. These entities can possess other objects, exist independently, or be composed into intricate hierarchies. This challenge explores how to leverage these unique features to build a scalable and interactive gaming infrastructure.</p>
+        <h4>1. Clone the Repository</h4>
+        <p>Open your terminal and run:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>git clone https://github.com/Fr0zennx/sui-car.git</code></pre>
         
-        <h2>Technical Learning Objectives</h2>
-        <p>By completing this project, you will gain hands-on experience with the core pillars of Sui development:</p>
-        <ul>
-          <li><strong>Hierarchical Object Composition:</strong> Implement the <code>Option</code> type to create dynamic "slots" within parent objects, allowing a <code>Car</code> to own and manage sub-components like <code>Wheels</code> and <code>Bumpers</code>.</li>
-          <li><strong>Reference Management and Permissions:</strong> Distinguish between mutable references (<code>&mut Car</code>) for state updates and owned objects (<code>Car</code>) for complete lifecycle control.</li>
-          <li><strong>Deterministic Ownership Transfer:</strong> Master the "swap and return" pattern. Sui's ownership model ensures that assets are never implicitly deleted; you will learn to use <code>swap_or_fill</code> to return replaced components to the user's registry.</li>
-          <li><strong>Asynchronous State Synchronization:</strong> Utilize Move <code>Events</code> to bridge the gap between on-chain logic and the user interface, enabling real-time feedback for modification actions.</li>
-          <li><strong>Atomic Transaction Design:</strong> Structure your code to support Programmable Transaction Blocks (PTBs), allowing users to execute complex multi-step operations—such as purchasing and installing a part—in a single, atomic execution.</li>
-        </ul>
+        <h4>2. Navigate to the UI Directory</h4>
+        <p>The frontend of the project is located in the <code>ui</code> folder. Move into it to manage dependencies:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>cd Character-Card/ui</code></pre>
         
-        <h2>Curriculum Structure</h2>
-        <p>This challenge utilizes a <strong>Skeleton Contract</strong> methodology. You are provided with the architectural blueprint, and your responsibility is to implement the underlying logic across four distinct chapters:</p>
-        <ol>
-          <li><strong>Chapter 1: Data Modeling:</strong> Define the core schema for the vehicle and its modular components.</li>
-          <li><strong>Chapter 2: Lifecycle Implementation:</strong> Develop the factory logic for instantiation (Minting) and state mutation (Repainting).</li>
-          <li><strong>Chapter 3: Modular Integration:</strong> Build the logic for object composition, ensuring correct ownership handling during part installation.</li>
-          <li><strong>Chapter 4: Security and State Validation:</strong> Implement safety assertions and retrieval logic to ensure the integrity of the asset hierarchy.</li>
-        </ol>
+        <h4>3. Install Dependencies</h4>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm install</code></pre>
         
-        <p>Upon completion, you will have engineered a production-ready, modular NFT system capable of serving as the foundation for decentralized gaming ecosystems or high-fidelity on-chain marketplaces.</p>
+        <h4>4. Start Development Server</h4>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm run dev</code></pre>
         
-        <h2>Next Step: Chapter 1 Implementation</h2>
-        <p>Proceed with the technical specifications and requirements for <strong>Chapter 1: Data Modeling</strong>. In this chapter, you will define the specific logic for the <code>Car</code>, <code>Bumper</code>, and <code>CarModifiedEvent</code> structures.</p>
+        <h4>5. Important Note on Challenges</h4>
+        <p>Follow the chapter instructions carefully. <strong>Every step of your Move development must be completed inside the <code>sources/car_game.move</code> file.</strong> Once you finish the logic there and deploy your contract, use the submission modal to send your Suiscan and Vercel links.</p>
+        
+        <p style="color: #4da6ff; font-style: italic; margin-top: 2rem;">Ready to start? Click <strong>Chapter 1: Data Modeling and Schema Design</strong> to begin!</p>
       `
     },
     {

@@ -14,37 +14,33 @@ function BalanceView({ onClose }: BalanceViewProps) {
     {
       title: 'Introduction',
       content: `
-        <h3>Battle & Level Up</h3>
+        <h3>How to Clone and Setup the Project</h3>
+        <p>To start working on the Character Card project, you need to pull the source code from GitHub to your local machine. Follow these steps:</p>
         
-        <h4>Project Overview</h4>
-        <p>The objective is to develop the <strong>Hero-Core</strong> module. Unlike traditional blockchains, Sui treats assets as individual objects, making it an ideal environment for gaming logic. In this project, the smart contract will govern the lifecycle of a Hero, including creation, combat simulation, and attribute restoration.</p>
+        <h4>1. Clone the Repository</h4>
+        <p>Open your terminal (Command Prompt, PowerShell, or Terminal) and run the following command to download the project:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>git clone https://github.com/Fr0zennx/Battle---Level-Up.git</code></pre>
         
-        <p>Through this implementation, players will be able to:</p>
-        <ul>
-          <li><strong>Mint Unique Assets:</strong> Generate Hero objects with personalized metadata.</li>
-          <li><strong>State Persistence:</strong> Perform on-chain combat that modifies the hero's experience (XP) and health (HP).</li>
-          <li><strong>Automated Progression:</strong> Execute level-up logic once specific XP thresholds are met.</li>
-          <li><strong>Asset Maintenance:</strong> Interact with healing functions to reset object attributes.</li>
-        </ul>
+        <h4>2. Navigate to the Project Folder</h4>
+        <p>Move into the directory you just cloned:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>cd Character-Card</code></pre>
         
-        <h4>Technical Skills Acquired</h4>
-        <p>Completing this tutorial will provide proficiency in the following Move development areas:</p>
-        <ul>
-          <li><strong>Sui Object Model:</strong> Defining assets using <code>struct</code> and understanding the significance of the <code>UID</code> field.</li>
-          <li><strong>Ability System:</strong> Utilizing <code>key</code> and <code>store</code> abilities to define how objects behave within the ecosystem.</li>
-          <li><strong>Ownership Management:</strong> Implementing <code>sui::transfer</code> for the secure delivery of assets to user addresses.</li>
-          <li><strong>State Mutation:</strong> Managing mutable references (<code>&mut</code>) to update existing object data efficiently.</li>
-          <li><strong>Conditional Logic & Assertions:</strong> Implementing safety checks using <code>assert!</code> to enforce game rules and prevent invalid state transitions.</li>
-        </ul>
+        <h4>3. Install Dependencies</h4>
+        <p>This project uses Node.js. Run the following command to install all necessary packages:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm install
+# or if you use yarn
+yarn install</code></pre>
         
-        <h4>Application Architecture</h4>
-        <p>The application is divided into four distinct phases:</p>
-        <ol>
-          <li><strong>Data Modeling:</strong> Establishing the fundamental structure of the Hero asset.</li>
-          <li><strong>Asset Forging:</strong> Developing the constructor functions and ownership transfer logic.</li>
-          <li><strong>Combat Engine:</strong> Creating the logic for state changes, resource depletion, and experience gains.</li>
-          <li><strong>State Restoration:</strong> Implementing recovery functions to reset specific object fields.</li>
-        </ol>
+        <h4>4. Start the Development Server</h4>
+        <p>Once the installation is complete, you can start the project locally to see it in your browser:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm run dev
+# or
+yarn dev</code></pre>
+        
+        <h4>5. Ready to Move!</h4>
+        <p>Open <strong>http://localhost:3000</strong> (or the port shown in your terminal) to view the application. You are now ready to start your Sui Move journey!</p>
+        
+        <p style="color: #4da6ff; font-style: italic; margin-top: 2rem;">Ready to start? Click <strong>Chapter 1: Data Structure Modeling</strong> to begin!</p>
       `
     },
     {

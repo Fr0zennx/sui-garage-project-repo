@@ -16,8 +16,14 @@ app.use(express.json());
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+console.log('Environment check:');
+console.log('SUPABASE_URL:', supabaseUrl ? 'Found' : 'Missing');
+console.log('SERVICE_ROLE_KEY:', supabaseServiceKey ? 'Found' : 'Missing');
+
 if (!supabaseUrl || !supabaseServiceKey) {
   console.error('Missing Supabase credentials in environment variables');
+  console.error('SUPABASE_URL:', supabaseUrl);
+  console.error('SERVICE_ROLE_KEY:', supabaseServiceKey ? 'Present' : 'Missing');
   process.exit(1);
 }
 

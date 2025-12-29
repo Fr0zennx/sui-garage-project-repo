@@ -14,19 +14,33 @@ function NFTVisualOwnershipView({ onClose }: NFTVisualOwnershipViewProps) {
     {
       title: 'Introduction',
       content: `
-        <h3>NFT & Visual Ownership (The Entry Ticket)</h3>
-        <p><strong>In Level 1, you created data. In Level 2, you create Art.</strong> On most blockchains, wallets have to guess how to display your NFT. On Sui, we use the Display Standard—a powerful template system that tells wallets and marketplaces (like BlueMove) exactly how to render your object using on-chain data.</p>
+        <h3>How to Clone and Setup the Project</h3>
+        <p>To start working on the Character Card project, you need to pull the source code from GitHub to your local machine. Follow these steps:</p>
         
-        <h4>What you will learn:</h4>
-        <ul>
-          <li><strong>Visual Data Structures:</strong> Add image URLs and metadata to your NFTs.</li>
-          <li><strong>One-Time Witness (OTW):</strong> Prove ownership of your module.</li>
-          <li><strong>Display Standard:</strong> Create templates that wallets understand.</li>
-          <li><strong>Minting NFTs:</strong> Generate collectible tickets programmatically.</li>
-          <li><strong>Testnet Deployment:</strong> Make your NFTs live on Sui's blockchain.</li>
-        </ul>
+        <h4>1. Clone the Repository</h4>
+        <p>Open your terminal (Command Prompt, PowerShell, or Terminal) and run the following command to download the project:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>git clone https://github.com/Fr0zennx/NFT---Visual-Ownership.git</code></pre>
         
-        <p style="color: #4da6ff; font-style: italic; margin-top: 2rem;">Ready to create visual assets? Let's begin with <strong>Chapter 1: Struct Definition</strong>!</p>
+        <h4>2. Navigate to the Project Folder</h4>
+        <p>Move into the directory you just cloned:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>cd Character-Card</code></pre>
+        
+        <h4>3. Install Dependencies</h4>
+        <p>This project uses Node.js. Run the following command to install all necessary packages:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm install
+# or if you use yarn
+yarn install</code></pre>
+        
+        <h4>4. Start the Development Server</h4>
+        <p>Once the installation is complete, you can start the project locally to see it in your browser:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm run dev
+# or
+yarn dev</code></pre>
+        
+        <h4>5. Ready to Move!</h4>
+        <p>Open <strong>http://localhost:3000</strong> (or the port shown in your terminal) to view the application. You are now ready to start your Sui Move journey!</p>
+        
+        <p style="color: #4da6ff; font-style: italic; margin-top: 2rem;">Ready to start? Click <strong>Chapter 1: Struct Definition</strong> to begin!</p>
       `
     },
     {

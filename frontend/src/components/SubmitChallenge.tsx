@@ -24,45 +24,59 @@ function SubmitChallenge({ chapterTitle, chapterId, onClose, onSubmit }: SubmitC
 
   const validateVercelUrl = (url: string): boolean => {
     if (!url) return false;
-    const isValid = vercelUrlPattern.test(url);
-    setErrors(prev => ({
-      ...prev,
-      vercel: !isValid && url ? 'Please enter a valid Vercel URL (e.g., https://your-app.vercel.app)' : ''
-    }));
-    return isValid;
+    return vercelUrlPattern.test(url);
   };
 
   const validateSuiscanUrl = (url: string): boolean => {
     if (!url) return false;
-    const isValid = suiscanUrlPattern.test(url);
-    setErrors(prev => ({
-      ...prev,
-      suiscan: !isValid && url ? 'Please enter a valid Sui explorer URL (Suiscan, SuiVision, or SuiExplorer)' : ''
-    }));
-    return isValid;
+    return suiscanUrlPattern.test(url);
   };
 
   const handleVercelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setVercelUrl(value);
-    if (value) validateVercelUrl(value);
-    else setErrors(prev => ({ ...prev, vercel: '' }));
+    if (value) {
+      const isValid = vercelUrlPattern.test(value);
+      setErrors(prev => ({
+        ...prev,
+        vercel: !isValid ? 'Please enter a valid Vercel URL (e.g., https://your-app.vercel.app)' : ''
+      }));
+    } else {
+      setErrors(prev => ({ ...prev, vercel: '' }));
+    }
   };
 
   const handleSuiscanChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSuiscanUrl(value);
-    if (value) validateSuiscanUrl(value);
-    else setErrors(prev => ({ ...prev, suiscan: '' }));
+    if (value) {
+      const isValid = suiscanUrlPattern.test(value);
+      setErrors(prev => ({
+        ...prev,
+        suiscan: !isValid ? 'Please enter a valid Sui explorer URL (Suiscan, SuiVision, or SuiExplorer)' : ''
+      }));
+    } else {
+      setErrors(prev => ({ ...prev, suiscan: '' }));
+    }
   };
 
   const isFormValid = () => {
-    return (
-      vercelUrl.trim() !== '' &&
-      suiscanUrl.trim() !== '' &&
-      validateVercelUrl(vercelUrl) &&
-      validateSuiscanUrl(suiscanUrl)
-    );
+    // Chapter 2 (Character Card) doesn't require Vercel URL
+    const requiresVercel = chapterId !== 2;
+    
+    if (requiresVercel) {
+      return (
+        vercelUrl.trim() !== '' &&
+        suiscanUrl.trim() !== '' &&
+        validateVercelUrl(vercelUrl) &&
+        validateSuiscanUrl(suiscanUrl)
+      );
+    } else {
+      return (
+        suiscanUrl.trim() !== '' &&
+        validateSuiscanUrl(suiscanUrl)
+      );
+    }
   };
 
   const handleSubmit = async () => {
@@ -163,7 +177,8 @@ function SubmitChallenge({ chapterTitle, chapterId, onClose, onSubmit }: SubmitC
 
         {/* Form */}
         <div className="submit-challenge-form">
-          {/* Vercel URL Input */}
+          {/* Vercel URL Input - Only show for chapters that require it */}
+          {chapterId !== 2 && (
           <div className="submit-challenge-field">
             <label className="submit-challenge-label">
               <span className="label-text">Deployed URL</span>
@@ -189,6 +204,7 @@ function SubmitChallenge({ chapterTitle, chapterId, onClose, onSubmit }: SubmitC
             )}
             <p className="submit-challenge-hint">Enter your deployed Vercel application URL</p>
           </div>
+          )}
 
           {/* Suiscan URL Input */}
           <div className="submit-challenge-field">

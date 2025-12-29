@@ -14,16 +14,31 @@ function CharacterCardView({ onClose }: CharacterCardViewProps) {
     {
       title: 'Introduction',
       content: `
-        <h3>Welcome to the first step of your Sui development journey!</h3>
-        <p>In the Ethereum world, the blockchain is often viewed as a ledger of accounts and balances. However, Sui introduces a paradigm shift: <strong>Everything is an Object.</strong> In this level, you will move away from thinking in terms of addresses and balances and start thinking in terms of Assets. You are going to build your first digital asset—a <strong>Character Card.</strong> This is not just a piece of data stored in a contract; it is a standalone object that exists in the Sui ecosystem, capable of being owned, transferred, and updated.</p>
+        <h3>How to Clone and Setup the Project</h3>
+        <p>To start working on the Character Card project, you need to pull the source code from GitHub to your local machine. Follow these steps:</p>
         
-        <h4>What you will achieve:</h4>
-        <ul>
-          <li><strong>The "Object" Mindset:</strong> Understand how Sui stores data as independent objects with unique IDs.</li>
-          <li><strong>Identity on Chain:</strong> Create a personal profile card that stores your name and bio directly on the blockchain.</li>
-          <li><strong>True Ownership:</strong> Learn how to send this card to your wallet, where you—and only you—have full control over it.</li>
-          <li><strong>The Full Lifecycle:</strong> Go from writing your first line of Move code to deploying a live package on the Sui Testnet.</li>
-        </ul>
+        <h4>1. Clone the Repository</h4>
+        <p>Open your terminal (Command Prompt, PowerShell, or Terminal) and run the following command to download the project:</p>
+        <pre><code>git clone https://github.com/Fr0zennx/Character-Card.git</code></pre>
+        
+        <h4>2. Navigate to the Project Folder</h4>
+        <p>Move into the directory you just cloned:</p>
+        <pre><code>cd Character-Card</code></pre>
+        
+        <h4>3. Install Dependencies</h4>
+        <p>This project uses Node.js. Run the following command to install all necessary packages:</p>
+        <pre><code>npm install
+# or if you use yarn
+yarn install</code></pre>
+        
+        <h4>4. Start the Development Server</h4>
+        <p>Once the installation is complete, you can start the project locally to see it in your browser:</p>
+        <pre><code>npm run dev
+# or
+yarn dev</code></pre>
+        
+        <h4>5. Ready to Move!</h4>
+        <p>Open <strong>http://localhost:3000</strong> (or the port shown in your terminal) to view the application. You are now ready to start your Sui Move journey!</p>
         
         <p style="color: #4da6ff; font-style: italic; margin-top: 2rem;">Ready to start? Click on <strong>Chapter 1: Modules and Imports</strong> to begin setting up the foundation of your contract!</p>
       `

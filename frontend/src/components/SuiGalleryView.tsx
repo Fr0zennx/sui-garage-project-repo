@@ -14,35 +14,33 @@ function SuiGalleryView({ onClose }: SuiGalleryViewProps) {
     {
       title: 'Introduction',
       content: `
-        <h1>Sui Gallery: NFT Collections and Visual Assets</h1>
-        <p>Welcome to the <strong>Sui Gallery</strong> development guide. This comprehensive curriculum teaches you how to create, manage, and showcase NFT collections on the Sui blockchain.</p>
+        <h3>How to Clone and Setup the Project</h3>
+        <p>To start working on the Character Card project, you need to pull the source code from GitHub to your local machine. Follow these steps:</p>
         
-        <p>Unlike traditional digital galleries, Sui Gallery leverages the power of Sui's object model to create dynamic, composable, and truly owned digital assets. Each NFT is not just a token reference—it's a full, independent object with its own state, metadata, and capabilities.</p>
+        <h4>1. Clone the Repository</h4>
+        <p>Open your terminal (Command Prompt, PowerShell, or Terminal) and run the following command to download the project:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>git clone https://github.com/Fr0zennx/sui-gallery.git</code></pre>
         
-        <h2>Learning Objectives</h2>
-        <p>By completing this comprehensive guide, you will master:</p>
-        <ul>
-          <li><strong>NFT Standard Implementation:</strong> Learn the Sui NFT standard and how to create compliant, transferable digital assets.</li>
-          <li><strong>Metadata Management:</strong> Store and manage rich metadata including images, descriptions, and custom attributes on-chain.</li>
-          <li><strong>Collection Management:</strong> Group NFTs into collections with proper ownership and access control.</li>
-          <li><strong>Dynamic Properties:</strong> Implement mutable NFT properties that can be updated while preserving ownership.</li>
-          <li><strong>Market Integration:</strong> Prepare your NFTs for marketplace integration and secondary sales.</li>
-        </ul>
+        <h4>2. Navigate to the Project Folder</h4>
+        <p>Move into the directory you just cloned:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>cd Character-Card</code></pre>
         
-        <h2>Curriculum Structure</h2>
-        <p>This guide is organized into five comprehensive modules:</p>
-        <ol>
-          <li><strong>Module 1: NFT Data Structures:</strong> Define the core schema for your NFT collections.</li>
-          <li><strong>Module 2: Minting and Creation:</strong> Implement factory logic to create new NFTs.</li>
-          <li><strong>Module 3: Collection Management:</strong> Organize NFTs into collections with metadata.</li>
-          <li><strong>Module 4: Dynamic Properties:</strong> Add and modify NFT attributes post-minting.</li>
-          <li><strong>Module 5: Marketplace Ready:</strong> Prepare NFTs for trading and showcase.</li>
-        </ol>
+        <h4>3. Install Dependencies</h4>
+        <p>This project uses Node.js. Run the following command to install all necessary packages:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm install
+# or if you use yarn
+yarn install</code></pre>
         
-        <p>Upon completion, you will have built a production-ready NFT collection system capable of supporting complex digital asset ecosystems.</p>
+        <h4>4. Start the Development Server</h4>
+        <p>Once the installation is complete, you can start the project locally to see it in your browser:</p>
+        <pre style="background: rgba(30, 144, 255, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; border-left: 3px solid #1e90ff;"><code>npm run dev
+# or
+yarn dev</code></pre>
         
-        <h2>Getting Started</h2>
-        <p>Navigate through the modules to learn each aspect of NFT creation and management on Sui. Each module includes detailed code examples and implementation tasks.</p>
+        <h4>5. Ready to Move!</h4>
+        <p>Open <strong>http://localhost:3000</strong> (or the port shown in your terminal) to view the application. You are now ready to start your Sui Move journey!</p>
+        
+        <p style="color: #4da6ff; font-style: italic; margin-top: 2rem;">Ready to start? Click <strong>Chapter 1: Architecting the Asset (The Car Struct)</strong> to begin!</p>
       `
     },
     {
