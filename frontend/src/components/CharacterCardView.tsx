@@ -143,7 +143,7 @@ function CharacterCardView({ onClose }: CharacterCardViewProps) {
       </button>
 
       <div className="character-card-header-section">
-        <h1 className="character-card-title">Character Card Development</h1>
+        <h1 className="character-card-title">Character Card </h1>
       </div>
 
       <div className="character-card-tabs">

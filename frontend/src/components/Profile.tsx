@@ -1,27 +1,28 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
-import { useState } from 'react';
-import LessonView from './LessonView';
-import CharacterCardView from './CharacterCardView';
-import NFTVisualOwnershipView from './NFTVisualOwnershipView';
-import BalanceView from './BalanceView';
-import SuiCarView from './SuiCarView';
-import SuiGalleryView from './SuiGalleryView';
 import ChromaGrid, { ChromaGridItem } from './ChromaGrid';
 import { profileStaticData } from '../data/profileData';
 import './Profile.css';
 
 interface ProfileProps {
   onClose: () => void;
+  onOpenLesson?: () => void;
+  onOpenCharacterCard?: () => void;
+  onOpenNFTOwnership?: () => void;
+  onOpenBalance?: () => void;
+  onOpenSuiCar?: () => void;
+  onOpenSuiGallery?: () => void;
 }
 
-function Profile({ onClose }: ProfileProps) {
+function Profile({ 
+  onClose, 
+  onOpenLesson,
+  onOpenCharacterCard,
+  onOpenNFTOwnership,
+  onOpenBalance,
+  onOpenSuiCar,
+  onOpenSuiGallery
+}: ProfileProps) {
   const currentAccount = useCurrentAccount();
-  const [showLesson, setShowLesson] = useState(false);
-  const [showCharacterCard, setShowCharacterCard] = useState(false);
-  const [showNFTOwnership, setShowNFTOwnership] = useState(false);
-  const [showBalance, setShowBalance] = useState(false);
-  const [showSuiCar, setShowSuiCar] = useState(false);
-  const [showSuiGallery, setShowSuiGallery] = useState(false);
 
   if (!currentAccount) {
     return null;
@@ -59,17 +60,35 @@ function Profile({ onClose }: ProfileProps) {
     
     if (item.action === 'lesson') {
       if (item.id === 'garage') {
-        handleClick = () => setShowLesson(true);
+        handleClick = () => {
+          onClose();
+          onOpenLesson?.();
+        };
       } else if (item.id === 'status') {
-        handleClick = () => setShowCharacterCard(true);
+        handleClick = () => {
+          onClose();
+          onOpenCharacterCard?.();
+        };
       } else if (item.id === 'wallet') {
-        handleClick = () => setShowNFTOwnership(true);
+        handleClick = () => {
+          onClose();
+          onOpenNFTOwnership?.();
+        };
       } else if (item.id === 'balance') {
-        handleClick = () => setShowBalance(true);
+        handleClick = () => {
+          onClose();
+          onOpenBalance?.();
+        };
       } else if (item.id === 'transactions') {
-        handleClick = () => setShowSuiCar(true);
+        handleClick = () => {
+          onClose();
+          onOpenSuiCar?.();
+        };
       } else if (item.id === 'nfts') {
-        handleClick = () => setShowSuiGallery(true);
+        handleClick = () => {
+          onClose();
+          onOpenSuiGallery?.();
+        };
       }
     }
 
@@ -123,24 +142,6 @@ function Profile({ onClose }: ProfileProps) {
           </div>
         </div>
       </div>
-
-      {/* Lesson View */}
-      {showLesson && <LessonView onClose={() => setShowLesson(false)} />}
-
-      {/* Character Card View */}
-      {showCharacterCard && <CharacterCardView onClose={() => setShowCharacterCard(false)} />}
-
-      {/* NFT Ownership View */}
-      {showNFTOwnership && <NFTVisualOwnershipView onClose={() => setShowNFTOwnership(false)} />}
-
-      {/* Balance View */}
-      {showBalance && <BalanceView onClose={() => setShowBalance(false)} />}
-
-      {/* Sui Car View */}
-      {showSuiCar && <SuiCarView onClose={() => setShowSuiCar(false)} />}
-
-      {/* Sui Gallery View */}
-      {showSuiGallery && <SuiGalleryView onClose={() => setShowSuiGallery(false)} />}
     </div>
   );
 }
