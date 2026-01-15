@@ -318,9 +318,72 @@ public entry fun create_wheels(
       `
     },
     {
-      title: 'Chapter 6: Deployment to SUI Testnet',
+      title: 'Chapter 6: Parts Manufacturing & PTB Design',
       content: `
-        <h1>Chapter 6: Deployment to SUI Testnet</h1>
+        <h1>Chapter 6: Parts Manufacturing & PTB Design</h1>
+        <p>In this chapter of the Sui Garage project, you will move beyond the Car itself and focus on creating the individual components: <strong>Wheels</strong> and <strong>Bumpers</strong>. This section introduces a critical architectural decision in Sui development: the difference between <strong>Entry Functions</strong> and <strong>Return-based Functions</strong>.</p>
+        
+        <h2>🎯 Your Mission</h2>
+        <p>Your goal is to implement two different ways of creating car parts. One method will send the part directly to the user's wallet, while the other will return the part so it can be used immediately inside a <strong>Programmable Transaction Block (PTB)</strong>.</p>
+        
+        <h2>📋 Logic Requirements</h2>
+        
+        <h3>1. Direct Minting (create_wheels)</h3>
+        <ul>
+          <li><strong>Requirement:</strong> This must be an <code>entry</code> function.</li>
+          <li><strong>Logic:</strong> Initialize a new Wheels object with the provided style.</li>
+          <li><strong>Action:</strong> Use <code>transfer::public_transfer</code> to deliver the wheels to the person who called the function (<code>tx_context::sender</code>).</li>
+        </ul>
+        
+        <h3>2. The "Return" Pattern (new_bumper & new_wheels)</h3>
+        <ul>
+          <li><strong>Requirement:</strong> These should be <code>public</code> functions, <strong>not</strong> entry functions.</li>
+          <li><strong>Return Type:</strong> They must return the object itself (<code>Wheels</code> or <code>Bumper</code>).</li>
+          <li><strong>Why?</strong> This allows a developer to "chain" transactions. For example, a user could call <code>new_wheels</code> and then immediately pass that output into <code>install_wheels</code> all within a single transaction block.</li>
+        </ul>
+        
+        <h2>💡 Key Move Concepts to Remember</h2>
+        <h3>Entry vs. Public Functions:</h3>
+        <ul>
+          <li><code>entry</code> functions are the "end of the line." They are called directly by wallets and <strong>cannot return values</strong> to other Move functions.</li>
+          <li><code>public</code> functions that return objects are the building blocks of <strong>Programmable Transaction Blocks (PTBs)</strong>. They allow for complex, atomic operations where you create, modify, and store an object in one go.</li>
+        </ul>
+        
+        <h2>Chapter 6: Code Task</h2>
+        <p>Implement both patterns for parts manufacturing:</p>
+        
+        <pre><code>// === CHAPTER 6: PARTS MANUFACTURING ===
+
+/// Direct minting - sends to wallet immediately
+public entry fun create_wheels(
+    style: vector&lt;u8&gt;, 
+    ctx: &mut TxContext
+) {
+    // TODO: Create a new Wheels object
+    // TODO: Transfer it to the sender
+}
+
+/// Return pattern - for PTB composition
+public fun new_wheels(
+    style: vector&lt;u8&gt;, 
+    ctx: &mut TxContext
+): Wheels {
+    // TODO: Create and RETURN the Wheels object
+}
+
+/// Return pattern for Bumper
+public fun new_bumper(
+    shape: vector&lt;u8&gt;, 
+    ctx: &mut TxContext
+): Bumper {
+    // TODO: Create and RETURN the Bumper object
+}</code></pre>
+      `
+    },
+    {
+      title: 'Chapter 7: Deployment to SUI Testnet',
+      content: `
+        <h1>Chapter 7: Deployment to SUI Testnet</h1>
         <p>After modeling data, implementing logic, and verifying your code with unit tests, the final step is <strong>Deployment</strong>. In SUI, publishing a contract converts your Move code into an on-chain package that anyone (or authorized users) can interact with.</p>
         
         <h2>The Core Concepts</h2>
