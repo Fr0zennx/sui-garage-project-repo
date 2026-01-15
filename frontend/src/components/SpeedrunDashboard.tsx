@@ -8,6 +8,7 @@ import { VscAccount } from 'react-icons/vsc';
 import { TracingBeam } from './ui/tracing-beam';
 import { NoiseBackground } from './ui/noise-background';
 import { Vortex } from './ui/vortex';
+import PixelBlast from './ui/PixelBlast';
 import Profile from './Profile';
 import LessonView from './LessonView';
 import CharacterCardView from './CharacterCardView';
@@ -259,6 +260,29 @@ function SpeedrunDashboard() {
 
   return (
     <div className="dashboard-container">
+      {/* PixelBlast Background */}
+      <div className="pixel-blast-background">
+        <PixelBlast
+          variant="circle"
+          pixelSize={6}
+          color="#4facfe"
+          patternScale={3}
+          patternDensity={1.2}
+          pixelSizeJitter={0.5}
+          enableRipples
+          rippleSpeed={0.4}
+          rippleThickness={0.12}
+          rippleIntensityScale={1.5}
+          liquid
+          liquidStrength={0.12}
+          liquidRadius={1.2}
+          liquidWobbleSpeed={5}
+          speed={0.6}
+          edgeFade={0.25}
+          transparent
+        />
+      </div>
+
       {/* Left Vortex Strip */}
       <div className="vortex-strip vortex-left">
         <Vortex
