@@ -47,6 +47,38 @@
   --spotlight-color: rgba(255, 255, 255, 0.15);
 }
 
+/* Card with image */
+.chroma-card.has-image {
+  background: rgba(10, 14, 30, 0.5);
+}
+
+.chroma-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.chroma-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.chroma-card.has-image:hover .chroma-card-image img {
+  opacity: 0.55;
+  transform: scale(1.05);
+}
+
+.chroma-card.has-image .chroma-card-content {
+  background: linear-gradient(to top, rgba(5, 8, 16, 0.9) 0%, rgba(5, 8, 16, 0.4) 50%, transparent 100%);
+}
+
 .chroma-card:hover {
   border-color: rgba(255, 0, 0, 0.8);
   transform: translateY(-2px);

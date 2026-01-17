@@ -2,6 +2,7 @@ import { useCurrentAccount } from '@mysten/dapp-kit';
 import ChromaGrid, { ChromaGridItem } from './ChromaGrid';
 import { profileStaticData } from '../data/profileData';
 import ElectricBorder from './ui/ElectricBorder';
+import FloatingLines from './ui/FloatingLines';
 import './Profile.css';
 
 interface UserStatus {
@@ -141,6 +142,7 @@ function Profile({
       value: getDynamicValue(item.id),
       description: item.description,
       icon: item.icon,
+      image: item.image,
       color: isCompleted ? '#4caf50' : item.color,
       buttonLabel: item.action === 'lesson' ? (isCompleted ? 'Review' : 'Start') : undefined,
       onClick: handleClick,
@@ -149,6 +151,19 @@ function Profile({
 
   return (
     <div className="profile-overlay">
+      {/* FloatingLines Background */}
+      <div className="profile-floating-bg">
+        <FloatingLines 
+          enabledWaves={['top', 'middle', 'bottom']}
+          lineCount={[10, 15, 20]}
+          lineDistance={[8, 6, 4]}
+          bendRadius={5.0}
+          bendStrength={-0.5}
+          interactive={true}
+          parallax={true}
+          linesGradient={['#4facfe', '#00f2fe', '#667eea', '#764ba2']}
+        />
+      </div>
       <div className="profile-container">
         {/* Close button */}
         <button className="profile-close-btn" onClick={onClose}>
@@ -160,9 +175,9 @@ function Profile({
           <div className="profile-photo-container">
             <ElectricBorder
               color="#7df9ff"
-              speed={1}
-              chaos={0.5}
-              thickness={2}
+              speed={0.8}
+              chaos={0.2}
+              thickness={1}
               borderRadius={16}
               style={{ borderRadius: 16 }}
             >

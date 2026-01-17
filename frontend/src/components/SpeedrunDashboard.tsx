@@ -282,35 +282,7 @@ function SpeedrunDashboard() {
           transparent
         />
       </div>
-
-      {/* Left Vortex Strip */}
-      <div className="vortex-strip vortex-left">
-        <Vortex
-          backgroundColor="transparent"
-          particleCount={1200}
-          baseHue={180}
-          rangeY={800}
-          baseSpeed={0.15}
-          rangeSpeed={1.2}
-          baseRadius={0.8}
-          rangeRadius={1.8}
-        />
-      </div>
       
-      {/* Right Vortex Strip */}
-      <div className="vortex-strip vortex-right">
-        <Vortex
-          backgroundColor="transparent"
-          particleCount={1200}
-          baseHue={220}
-          rangeY={800}
-          baseSpeed={0.15}
-          rangeSpeed={1.2}
-          baseRadius={0.8}
-          rangeRadius={1.8}
-        />
-      </div>
-
       {/* Header */}
       <header className="dashboard-header">
         <div className="header-content">
@@ -331,50 +303,24 @@ function SpeedrunDashboard() {
           
           <div className="header-actions">
             {!currentAccount ? (
-              <NoiseBackground
-                containerClassName="connect-gradient-btn"
-                gradientColors={['rgb(102, 126, 234)', 'rgb(118, 75, 162)', 'rgb(79, 172, 254)']}
-                speed={0.05}
-                noiseIntensity={0.15}
-              >
-                <div className="connect-btn-content">
-                  <ConnectButton />
-                </div>
-              </NoiseBackground>
+              <div className="header-btn connect-btn">
+                <ConnectButton />
+              </div>
             ) : (
               <div className="wallet-info">
-                <NoiseBackground
-                  containerClassName="profile-gradient-btn"
-                  gradientColors={['rgb(102, 126, 234)', 'rgb(118, 75, 162)', 'rgb(79, 172, 254)']}
-                  speed={0.05}
-                  noiseIntensity={0.15}
-                >
-                  <button className="profile-btn-content" onClick={() => setShowProfile(true)}>
-                    <VscAccount size={18} />
-                    <span>Profile</span>
-                  </button>
-                </NoiseBackground>
+                <button className="header-btn profile-btn" onClick={() => setShowProfile(true)}>
+                  <VscAccount size={16} />
+                  <span>Profile</span>
+                </button>
                 <div className="wallet-badge">
-                  <VscAccount size={18} />
+                  <VscAccount size={16} />
                   <span className="wallet-address">
                     {currentAccount.address.substring(0, 6)}...{currentAccount.address.substring(currentAccount.address.length - 4)}
                   </span>
-                  {userStatus && (
-                    <span className="completion-badge" style={{ marginLeft: '8px', fontSize: '12px', color: '#4caf50', fontWeight: 'bold' }}>
-                      {userStatus.total_completed}/15 Levels
-                    </span>
-                  )}
                 </div>
-                <NoiseBackground
-                  containerClassName="disconnect-gradient-btn"
-                  gradientColors={['rgb(252, 129, 129)', 'rgb(239, 68, 68)', 'rgb(220, 38, 38)']}
-                  speed={0.05}
-                  noiseIntensity={0.15}
-                >
-                  <button className="disconnect-btn-content" onClick={handleDisconnect}>
-                    <span>Disconnect</span>
-                  </button>
-                </NoiseBackground>
+                <button className="header-btn disconnect-btn" onClick={handleDisconnect}>
+                  <span>Disconnect</span>
+                </button>
               </div>
             )}
           </div>

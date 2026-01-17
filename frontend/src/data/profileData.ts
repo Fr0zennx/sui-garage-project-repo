@@ -3,6 +3,7 @@ export interface ProfileStaticData {
   label: string;
   description: string;
   icon: string;
+  image?: string;
   color: string;
   action?: string;
 }
@@ -13,6 +14,7 @@ export const profileStaticData: ProfileStaticData[] = [
     label: 'Level 1: Sui Garage Development',
     description: 'Your learning hub for Sui development',
     icon: '🏗️',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=3432&auto=format&fit=crop',
     color: '#FF6B9D',
     action: 'lesson'
   },

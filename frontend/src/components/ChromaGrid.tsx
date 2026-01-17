@@ -7,6 +7,7 @@ export interface ChromaGridItem {
   label: string;
   value?: string;
   icon?: string;
+  image?: string;
   description?: string;
   color?: string;
   buttonLabel?: string;
@@ -101,7 +102,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
       {data.map((c, i) => (
         <article
           key={i}
-          className="chroma-card"
+          className={`chroma-card ${c.image ? 'has-image' : ''}`}
           data-card-id={c.id}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c)}
@@ -110,9 +111,14 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
             cursor: c.onClick ? 'pointer' : 'default'
           } as React.CSSProperties}
         >
+          {c.image && (
+            <div className="chroma-card-image">
+              <img src={c.image} alt={c.label} />
+            </div>
+          )}
           <div className="chroma-card-content">
             <div className="chroma-card-header">
-              {c.icon && <img src={c.icon} alt="" className="chroma-card-icon" />}
+              {c.icon && !c.image && <img src={c.icon} alt="" className="chroma-card-icon" />}
               <span className="chroma-card-label">{c.label}</span>
             </div>
             <div className="chroma-card-footer">
