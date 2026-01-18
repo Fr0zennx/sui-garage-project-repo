@@ -30,6 +30,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -53,6 +54,7 @@
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -83,76 +85,18 @@
 }
 
 .profile-left {
-  width: 280px;
-  min-width: 280px;
+  width: 340px;
+  min-width: 340px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
 }
 
-.profile-photo-container {
-  width: 200px;
-  height: 200px;
-}
 
-.profile-photo-card {
-  width: 100%;
-  height: 100%;
-  background: rgba(20, 30, 50, 0.8);
-  border-radius: 16px;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-photo-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.photo-icon {
-  width: 48px;
-  height: 48px;
-  opacity: 0.5;
-}
-
-.photo-text {
-  font-size: 0.85rem;
-  margin: 0;
-}
-
-.profile-wallet-info {
-  text-align: center;
-  width: 100%;
-}
-
-.profile-wallet-info h3 {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 0.5rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.profile-address {
-  font-family: 'JetBrains Mono', 'SF Mono', monospace;
-  font-size: 0.7rem;
-  color: #4facfe;
-  background: rgba(79, 172, 254, 0.1);
-  padding: 0.75rem;
-  border-radius: 8px;
-  word-break: break-all;
-  margin: 0;
-  border: 1px solid rgba(79, 172, 254, 0.2);
-}
 
 .profile-right {
   flex: 1;
@@ -175,6 +119,79 @@
   height: calc(100% - 60px);
 }
 
+/* Wallet Address Section */
+.profile-wallet-section {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-wallet-section h5 {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(125, 249, 255, 0.6);
+  margin: 0 0 0.75rem 0;
+  text-align: center;
+}
+
+.wallet-address-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(125, 249, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wallet-address-btn:hover {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: #7df9ff;
+  box-shadow: 0 0 10px rgba(125, 249, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.wallet-info-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wallet-icon-box {
+  width: 24px;
+  height: 24px;
+  color: #7df9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(125, 249, 255, 0.1);
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.wallet-text {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.wallet-copy-action {
+  width: 16px;
+  height: 16px;
+  color: rgba(125, 249, 255, 0.4);
+  transition: color 0.2s ease;
+}
+
+.wallet-address-btn:hover .wallet-copy-action {
+  color: #7df9ff;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .profile-container {
@@ -187,11 +204,6 @@
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1.5rem;
-  }
-
-  .profile-photo-container {
-    width: 150px;
-    height: 150px;
   }
 
   .profile-right {
