@@ -11,8 +11,8 @@ interface GettingStartedProps {
   onStartSuiGallery?: () => void;
 }
 
-function GettingStarted({ 
-  onClose, 
+function GettingStarted({
+  onClose,
   onStartSuiGarage,
   onStartCharacterCard,
   onStartNFTOwnership,
