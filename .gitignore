@@ -36,3 +36,4 @@ frontend/dist-ssr/
 .sui/
 sui.log
 
+.vercel

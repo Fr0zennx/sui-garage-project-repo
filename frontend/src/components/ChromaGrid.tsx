@@ -32,7 +32,6 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   columns = 3,
   rows = 2,
   damping = 0.45,
-  fadeOut = 0.6,
   ease = 'power3.out'
 }) => {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -45,8 +44,8 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
-    setX.current = gsap.quickSetter(el, '--x', 'px');
-    setY.current = gsap.quickSetter(el, '--y', 'px');
+    setX.current = gsap.quickSetter(el, '--x', 'px') as any;
+    setY.current = gsap.quickSetter(el, '--y', 'px') as any;
     const { width, height } = el.getBoundingClientRect();
     pos.current = { x: width / 2, y: height / 2 };
     if (setX.current) setX.current(pos.current.x);

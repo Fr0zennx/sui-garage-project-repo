@@ -59,9 +59,9 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>((props, ref)
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
   const splitIntoCharacters = (text: string) => {
-    if (typeof Intl !== 'undefined' && Intl.Segmenter) {
-      const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
-      return Array.from(segmenter.segment(text), segment => segment.segment);
+    if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+      const segmenter = new (Intl as any).Segmenter('en', { granularity: 'grapheme' });
+      return Array.from(segmenter.segment(text), (segment: any) => segment.segment);
     }
     return Array.from(text);
   };
@@ -184,9 +184,9 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>((props, ref)
                 {wordObj.characters.map((char, charIndex) => (
                   <motion.span
                     key={charIndex}
-                    initial={initial}
-                    animate={animate}
-                    exit={exit}
+                    initial={initial as any}
+                    animate={animate as any}
+                    exit={exit as any}
                     transition={{
                       ...transition,
                       delay: getStaggerDelay(

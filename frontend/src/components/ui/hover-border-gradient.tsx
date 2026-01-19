@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./hover-border-gradient.css";
 
 interface HoverBorderGradientProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { EffectComposer, RenderPass, EffectPass, BloomEffect, ChromaticAberrationEffect } from 'postprocessing';
 import * as THREE from 'three';
 import './GridScan.css';
@@ -337,7 +337,7 @@ export default function GridScan({
   const yawVel = useRef(0);
 
   const MAX_SCANS = 8;
-  const scanStartsRef = useRef<number[]>([]);
+
 
   const s = THREE.MathUtils.clamp(sensitivity, 0, 1);
   const skewScale = THREE.MathUtils.lerp(0.06, 0.2, s);
@@ -351,7 +351,7 @@ export default function GridScan({
     const el = containerRef.current;
     if (!el) return;
     let leaveTimer: number | null = null;
-    
+
     const onMove = (e: MouseEvent) => {
       if (leaveTimer) {
         clearTimeout(leaveTimer);
@@ -374,7 +374,7 @@ export default function GridScan({
 
     el.addEventListener('mousemove', onMove);
     el.addEventListener('mouseleave', onLeave);
-    
+
     return () => {
       el.removeEventListener('mousemove', onMove);
       el.removeEventListener('mouseleave', onLeave);

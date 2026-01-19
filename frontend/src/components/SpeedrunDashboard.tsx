@@ -1,13 +1,11 @@
-import { 
-  useCurrentAccount, 
+import {
+  useCurrentAccount,
   ConnectButton,
   useDisconnectWallet
 } from '@mysten/dapp-kit';
 import { useState, useEffect } from 'react';
 import { VscAccount } from 'react-icons/vsc';
 import { TracingBeam } from './ui/tracing-beam';
-import { NoiseBackground } from './ui/noise-background';
-import { Vortex } from './ui/vortex';
 import PixelBlast from './ui/PixelBlast';
 import RotatingText from './ui/RotatingText';
 import Profile from './Profile';
@@ -45,17 +43,17 @@ const contentData = [
     description: (
       <>
         <p>
-          Sui Speedrun is an interactive learning platform designed to help developers 
-          master the Sui blockchain through hands-on projects. Each level introduces 
+          Sui Speedrun is an interactive learning platform designed to help developers
+          master the Sui blockchain through hands-on projects. Each level introduces
           new concepts and challenges that build upon your knowledge progressively.
         </p>
         <p>
-          Start your journey by connecting your wallet and completing the first 
-          transaction. This will authenticate your account and unlock access to 
+          Start your journey by connecting your wallet and completing the first
+          transaction. This will authenticate your account and unlock access to
           all learning modules.
         </p>
         <p>
-          The platform covers everything from basic Move programming to advanced 
+          The platform covers everything from basic Move programming to advanced
           topics like NFTs, object ownership, and decentralized applications on Sui.
         </p>
       </>
@@ -84,7 +82,7 @@ const contentData = [
         </p>
       </>
     ),
-   
+
     image:
       "/character-card-id.png",
   },
@@ -111,7 +109,7 @@ const contentData = [
         </p>
       </>
     ),
-   
+
     image:
       "/nft-phoenix.png",
   },
@@ -142,7 +140,7 @@ const contentData = [
         </p>
       </>
     ),
-    
+
     image:
       "/battle-level-up.png",
   },
@@ -166,7 +164,7 @@ const contentData = [
         </p>
       </>
     ),
-    
+
     image:
       "/sui-car.png",
   },
@@ -193,7 +191,7 @@ const contentData = [
         </p>
       </>
     ),
-    
+
     image:
       "/sui-gallery.png",
   },
@@ -227,7 +225,7 @@ function SpeedrunDashboard() {
 
       try {
         const response = await fetch(`/api/user-status?address=${currentAccount.address}`);
-        
+
         // Check if response is ok before parsing JSON
         if (!response.ok) {
           const errorText = await response.text();
@@ -283,12 +281,12 @@ function SpeedrunDashboard() {
           transparent
         />
       </div>
-      
+
       {/* Header */}
       <header className="dashboard-header">
         <div className="header-content">
           <div className="logo-section">
-            <img 
+            <img
               src="https://cryptologos.cc/logos/sui-sui-logo.png"
               alt="Sui Logo"
               className="sui-logo"
@@ -301,7 +299,7 @@ function SpeedrunDashboard() {
             />
             <h1 className="logo-text">Sui Garage</h1>
           </div>
-          
+
           <div className="header-actions">
             {!currentAccount ? (
               <div className="header-btn connect-btn">
@@ -348,8 +346,8 @@ function SpeedrunDashboard() {
               rotationInterval={2000}
             />
           </div>
-          <SlideArrowButton 
-            text="Get Started" 
+          <SlideArrowButton
+            text="Get Started"
             primaryColor="#00bcd4"
             onClick={() => setShowGettingStarted(true)}
           />
@@ -385,7 +383,7 @@ function SpeedrunDashboard() {
 
       {/* Profile Modal */}
       {showProfile && currentAccount && (
-        <Profile 
+        <Profile
           onClose={() => setShowProfile(false)}
           onOpenLesson={() => setShowLesson(true)}
           onOpenCharacterCard={() => setShowCharacterCard(true)}
@@ -400,7 +398,7 @@ function SpeedrunDashboard() {
 
       {/* Getting Started Modal */}
       {showGettingStarted && (
-        <GettingStarted 
+        <GettingStarted
           onClose={() => setShowGettingStarted(false)}
           onStartSuiGarage={() => {
             setShowGettingStarted(false);

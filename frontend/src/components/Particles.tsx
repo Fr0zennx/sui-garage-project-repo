@@ -5,12 +5,12 @@ import './Particles.css';
 
 const defaultColors = ['#00bfff', '#1e90ff', '#00d4ff', '#4da6ff'];
 
-const hexToRgb = hex => {
+const hexToRgb = (hex: any) => {
   hex = hex.replace(/^#/, '');
   if (hex.length === 3) {
     hex = hex
       .split('')
-      .map(c => c + c)
+      .map((c: any) => c + c)
       .join('');
   }
   const int = parseInt(hex, 16);
@@ -99,8 +99,8 @@ const Particles = ({
   disableRotation = false,
   pixelRatio = 1,
   className
-}) => {
-  const containerRef = useRef(null);
+}: any) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -128,7 +128,7 @@ const Particles = ({
     window.addEventListener('resize', resize, false);
     resize();
 
-    const handleMouseMove = e => {
+    const handleMouseMove = (e: any) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
@@ -182,11 +182,11 @@ const Particles = ({
 
     const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
-    let animationFrameId;
+    let animationFrameId: any;
     let lastTime = performance.now();
     let elapsed = 0;
 
-    const update = t => {
+    const update = (t: any) => {
       animationFrameId = requestAnimationFrame(update);
       const delta = t - lastTime;
       lastTime = t;
