@@ -23,7 +23,7 @@ export const profileStaticData: ProfileStaticData[] = [
     label: 'Level 2: Character Card',
     description: 'Create your first NFT smart contract',
     icon: '⚡',
-    image: '/character-card-id.png',
+    image: '/character-card-id.webp',
     color: '#4ECDC4',
     action: 'lesson'
   },
@@ -32,7 +32,7 @@ export const profileStaticData: ProfileStaticData[] = [
     label: 'Level 3: NFT & Visual Ownership',
     description: 'Learn about NFT creation and visual assets',
     icon: '🎨',
-    image: '/nft-phoenix.png',
+    image: '/nft-phoenix.webp',
     color: '#1E90FF',
     action: 'lesson'
   },
@@ -41,7 +41,7 @@ export const profileStaticData: ProfileStaticData[] = [
     label: 'Level 4: Battle & Level Up',
     description: 'Your Sui token balance',
     icon: '💰',
-    image: '/battle-level-up.png',
+    image: '/battle-level-up.webp',
     color: '#FFD700',
     action: 'lesson'
   },
@@ -50,7 +50,7 @@ export const profileStaticData: ProfileStaticData[] = [
     label: 'Level 5: Sui Car',
     description: 'Your on-chain activities',
     icon: '📊',
-    image: '/sui-car.png',
+    image: '/sui-car.webp',
     color: '#00FF88',
     action: 'lesson'
   },
@@ -59,7 +59,7 @@ export const profileStaticData: ProfileStaticData[] = [
     label: 'Level 6: Sui Gallery',
     description: 'Your digital collectibles',
     icon: '🎨',
-    image: '/sui-gallery.png',
+    image: '/sui-gallery.webp',
     color: '#FF8C00',
     action: 'lesson'
   }

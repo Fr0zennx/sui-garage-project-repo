@@ -24,7 +24,7 @@ function GettingStarted({
     {
       title: 'Level 1: Sui Garage',
       button: 'Start ',
-      src: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=3432&auto=format&fit=crop',
+      src: '/Sui-Garage-Development.webp',
       onClick: () => {
         onClose();
         onStartSuiGarage?.();
@@ -33,7 +33,7 @@ function GettingStarted({
     {
       title: 'Level 2: Character Card',
       button: 'Start',
-      src: '/character-card-id.png',
+      src: '/character-card-id.webp',
       onClick: () => {
         onClose();
         onStartCharacterCard?.();
@@ -42,7 +42,7 @@ function GettingStarted({
     {
       title: 'Level 3: NFT & Visual Ownership',
       button: 'Start',
-      src: '/nft-phoenix.png',
+      src: '/nft-phoenix.webp',
       onClick: () => {
         onClose();
         onStartNFTOwnership?.();
@@ -51,7 +51,7 @@ function GettingStarted({
     {
       title: 'Level 4: Battle & Level Up',
       button: 'Start',
-      src: '/battle-level-up.png',
+      src: '/battle-level-up.webp',
       onClick: () => {
         onClose();
         onStartBalance?.();
@@ -60,7 +60,7 @@ function GettingStarted({
     {
       title: 'Level 5: Sui Car',
       button: 'Start',
-      src: '/sui-car.png',
+      src: '/sui-car.webp',
       onClick: () => {
         onClose();
         onStartSuiCar?.();
@@ -69,7 +69,7 @@ function GettingStarted({
     {
       title: 'Level 6: Sui Gallery',
       button: 'Start',
-      src: '/sui-gallery.png',
+      src: '/sui-gallery.webp',
       onClick: () => {
         onClose();
         onStartSuiGallery?.();
