@@ -12,7 +12,6 @@ import { DashboardContent } from './components/dashboard/DashboardContent';
 import './components/SpeedrunDashboard.css';
 
 // 🔄 LAZY: Heavy components loaded in background
-// const PixelBlast = lazy(() => import('./components/ui/PixelBlast')); // DISABLED for performance
 const Profile = lazy(() => import('./components/Profile'));
 const LessonView = lazy(() => import('./components/LessonView'));
 const CharacterCardView = lazy(() => import('./components/CharacterCardView'));
@@ -108,16 +107,8 @@ function AppContent() {
 
   return (
     <div className="dashboard-container">
-      {/* PixelBlast Background - DISABLED for Performance */}
-      {/* Note: PixelBlast was causing severe lag at 20x CPU throttling */}
+      {/* Background Effect */}
       <div className="pixel-blast-background" />
-      {/* Original PixelBlast code preserved but disabled:
-      {uiReady && (
-        <Suspense fallback={null}>
-          <PixelBlast ... />
-        </Suspense>
-      )}
-      */}
 
       {/* ⭐ LCP CRITICAL - Header renders IMMEDIATELY */}
       <DashboardHeader

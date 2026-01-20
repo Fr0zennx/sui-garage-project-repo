@@ -1,5 +1,53 @@
 /* NFT Profile Photo Component Styles */
 
+/* Animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutScale {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-enter {
+  animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-enter-up {
+  animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  opacity: 0;
+  /* Important for delay */
+}
+
+
 .nft-profile-container {
   display: flex;
   flex-direction: column;
@@ -14,6 +62,16 @@
   height: 200px;
 }
 
+/* Simple gradient border to replace ElectricBorder */
+.nft-photo-border {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(135deg, #4facfe 0%, #7df9ff 50%, #667eea 100%);
+  box-shadow: 0 0 20px rgba(125, 249, 255, 0.3);
+}
+
 .nft-photo-card {
   width: 100%;
   height: 100%;
@@ -24,6 +82,11 @@
   justify-content: center;
   overflow: hidden;
   position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nft-photo-card:hover {
+  transform: scale(1.02);
 }
 
 .nft-photo-card::before {
@@ -502,6 +565,14 @@
 .nft-guide-content {
   width: 100%;
   overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.nft-guide-content.open {
+  max-height: 600px;
+  opacity: 1;
 }
 
 .guide-card {
@@ -701,6 +772,10 @@
 
 .quick-start-btn:hover .quick-copy-icon {
   color: #7df9ff;
+}
+
+.nft-add-icon.spinning {
+  animation: spin 1s linear infinite;
 }
 
 /* Responsive */

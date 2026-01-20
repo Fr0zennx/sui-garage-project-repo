@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
-import ElectricBorder from './ui/ElectricBorder';
+// ElectricBorder removed for performance
 import './NFTProfilePhoto.css';
 
 interface NFTMetadata {
@@ -182,91 +181,63 @@ function NFTProfilePhoto({ walletAddress, onPhotoChange }: NFTProfilePhotoProps)
         <div className="nft-profile-container">
             {/* Profile Photo Display */}
             <div className="nft-photo-wrapper">
-                <ElectricBorder
-                    color="#7df9ff"
-                    speed={0.8}
-                    chaos={0.2}
-                    thickness={1}
-                    borderRadius={16}
-                    style={{ borderRadius: 16 }}
-                >
-                    <motion.div
-                        className="nft-photo-card"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                    >
-                        <AnimatePresence mode="wait">
-                            {displayNFT && !imageError ? (
-                                <motion.div
-                                    key="nft-image"
-                                    className="nft-image-container"
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
-                                    transition={{ duration: 0.3 }}
-                                >
-                                    <img
-                                        src={displayNFT.image}
-                                        alt={displayNFT.name}
-                                        className="nft-profile-image"
-                                        loading="lazy"
-                                        decoding="async"
-                                        onError={() => setImageError(true)}
-                                    />
-                                    {/* NFT Info Overlay */}
-                                    <div className="nft-info-overlay">
-                                        <span className="nft-collection">{displayNFT.collection}</span>
-                                        <span className="nft-name">{displayNFT.name}</span>
+                {/* Simple border container - ElectricBorder removed for performance */}
+                <div className="nft-photo-border">
+                    <div className="nft-photo-card">
+                        {displayNFT && !imageError ? (
+                            <div
+                                key="nft-image"
+                                className="nft-image-container animate-enter"
+                            >
+                                <img
+                                    src={displayNFT.image}
+                                    alt={displayNFT.name}
+                                    className="nft-profile-image"
+                                    loading="lazy"
+                                    decoding="async"
+                                    onError={() => setImageError(true)}
+                                />
+                                {/* NFT Info Overlay */}
+                                <div className="nft-info-overlay">
+                                    <span className="nft-collection">{displayNFT.collection}</span>
+                                    <span className="nft-name">{displayNFT.name}</span>
+                                </div>
+                            </div>
+                        ) : (
+                            <div
+                                key="placeholder"
+                                className="nft-placeholder animate-enter"
+                            >
+                                {isLoading ? (
+                                    <div className="nft-loading">
+                                        <div className="nft-spinner" />
+                                        <span>Loading NFT...</span>
                                     </div>
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    key="placeholder"
-                                    className="nft-placeholder"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                >
-                                    {isLoading ? (
-                                        <div className="nft-loading">
-                                            <div className="nft-spinner" />
-                                            <span>Loading NFT...</span>
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <svg className="nft-placeholder-icon" viewBox="0 0 24 24" fill="currentColor">
-                                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-                                            </svg>
-                                            <p className="nft-placeholder-text">Profile Photo</p>
-                                        </>
-                                    )}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </motion.div>
-                </ElectricBorder>
+                                ) : (
+                                    <>
+                                        <svg className="nft-placeholder-icon" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                                        </svg>
+                                        <p className="nft-placeholder-text">Profile Photo</p>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
 
             {/* NFT Attributes Display */}
-            <AnimatePresence>
-                {displayNFT && displayNFT.attributes && displayNFT.attributes.length > 0 && (
-                    <motion.div
-                        className="nft-attributes"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                    >
-                        {displayNFT.attributes.slice(0, 3).map((attr, index) => (
-                            <div key={index} className="nft-attribute">
-                                <span className="attr-type">{attr.trait_type}</span>
-                                <span className="attr-value">{attr.value}</span>
-                            </div>
-                        ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {displayNFT && displayNFT.attributes && displayNFT.attributes.length > 0 && (
+                <div className="nft-attributes animate-enter-up">
+                    {displayNFT.attributes.slice(0, 3).map((attr, index) => (
+                        <div key={index} className="nft-attribute">
+                            <span className="attr-type">{attr.trait_type}</span>
+                            <span className="attr-value">{attr.value}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
 
             {/* Input Section */}
             <div className="nft-input-section">
@@ -275,11 +246,7 @@ function NFTProfilePhoto({ walletAddress, onPhotoChange }: NFTProfilePhotoProps)
                     <div className="nft-input-glow" />
 
                     {/* Plus icon */}
-                    <motion.div
-                        className="nft-add-icon"
-                        animate={isLoading ? { rotate: 360 } : { rotate: 0 }}
-                        transition={isLoading ? { duration: 1, repeat: Infinity, ease: 'linear' } : {}}
-                    >
+                    <div className={`nft-add-icon ${isLoading ? 'spinning' : ''}`}>
                         {isLoading ? (
                             <svg className="w-8 h-8 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <circle cx="12" cy="12" r="10" opacity="0.3" />
@@ -290,7 +257,7 @@ function NFTProfilePhoto({ walletAddress, onPhotoChange }: NFTProfilePhotoProps)
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
                         )}
-                    </motion.div>
+                    </div>
 
                     {/* Input Group */}
                     <div className="nft-input-group">
@@ -317,16 +284,9 @@ function NFTProfilePhoto({ walletAddress, onPhotoChange }: NFTProfilePhotoProps)
                     </div>
 
                     {/* Action Buttons */}
-                    <AnimatePresence mode="wait">
+                    <div className="nft-button-group animate-enter">
                         {showPreview ? (
-                            <motion.div
-                                key="preview-buttons"
-                                className="nft-button-group"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8 }}
-                                transition={{ duration: 0.2 }}
-                            >
+                            <>
                                 <button
                                     onClick={handleConfirm}
                                     className="nft-btn nft-btn-confirm"
@@ -348,16 +308,9 @@ function NFTProfilePhoto({ walletAddress, onPhotoChange }: NFTProfilePhotoProps)
                                     </svg>
                                     Cancel
                                 </button>
-                            </motion.div>
+                            </>
                         ) : (
-                            <motion.div
-                                key="main-buttons"
-                                className="nft-button-group"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8 }}
-                                transition={{ duration: 0.2 }}
-                            >
+                            <>
                                 <button
                                     onClick={handleFetchNFT}
                                     className="nft-btn nft-btn-primary"
@@ -374,9 +327,9 @@ function NFTProfilePhoto({ walletAddress, onPhotoChange }: NFTProfilePhotoProps)
                                         Change Photo
                                     </button>
                                 )}
-                            </motion.div>
+                            </>
                         )}
-                    </AnimatePresence>
+                    </div>
                 </div>
             </div>
 
@@ -405,89 +358,79 @@ function NFTProfilePhoto({ walletAddress, onPhotoChange }: NFTProfilePhotoProps)
                     </svg>
                 </button>
 
-                <AnimatePresence>
-                    {showHelper && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="nft-guide-content"
-                        >
-                            <div className="guide-card">
-                                <h4>How to Add Your NFT Profile Picture</h4>
+                <div className={`nft-guide-content ${showHelper ? 'open' : ''}`}>
+                    <div className="guide-card">
+                        <h4>How to Add Your NFT Profile Picture</h4>
 
-                                <div className="guide-steps">
-                                    <div className="guide-step">
-                                        <div className="guide-icon">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <circle cx="11" cy="11" r="8" />
-                                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                            </svg>
-                                        </div>
-                                        <div className="guide-text">
-                                            <span className="step-title">1. Visit SuiScan and find your NFT</span>
-                                            <span className="step-desc">Go to suiscan.xyz and navigate to your NFT details page.</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="guide-step">
-                                        <div className="guide-icon">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                                            </svg>
-                                        </div>
-                                        <div className="guide-text">
-                                            <span className="step-title">2. Copy the NFT Object ID</span>
-                                            <span className="step-desc">Find the Object ID in the URL or details section:</span>
-                                            <code className="guide-code">suiscan.xyz/object/<span className="code-highlight">[OBJECT_ID]</span></code>
-                                        </div>
-                                    </div>
-
-                                    <div className="guide-step">
-                                        <div className="guide-icon">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-                                            </svg>
-                                        </div>
-                                        <div className="guide-text">
-                                            <span className="step-title">3. Paste the Object ID above</span>
-                                            <span className="step-desc">Enter the ID into the input field above.</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="guide-step">
-                                        <div className="guide-icon">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                                                <polyline points="22 4 12 14.01 9 11.01" />
-                                            </svg>
-                                        </div>
-                                        <div className="guide-text">
-                                            <span className="step-title">4. Click 'Set as Profile'</span>
-                                            <span className="step-desc">Your NFT will appear as your profile picture!</span>
-                                        </div>
-                                    </div>
+                        <div className="guide-steps">
+                            <div className="guide-step">
+                                <div className="guide-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                    </svg>
                                 </div>
-
-                                <div className="guide-footer">
-                                    <div className="network-badge">
-                                        <span className="dot" />
-                                        Supported Network: <strong>Sui Network</strong>
-                                    </div>
-
-                                    <div className="common-issues">
-                                        <h5>Common Issues</h5>
-                                        <p>• Make sure the Object ID is valid (starts with 0x)</p>
-                                        <p>• Ensure the NFT has a valid image URL</p>
-                                    </div>
+                                <div className="guide-text">
+                                    <span className="step-title">1. Visit SuiScan and find your NFT</span>
+                                    <span className="step-desc">Go to suiscan.xyz and navigate to your NFT details page.</span>
                                 </div>
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+
+                            <div className="guide-step">
+                                <div className="guide-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                    </svg>
+                                </div>
+                                <div className="guide-text">
+                                    <span className="step-title">2. Copy the NFT Object ID</span>
+                                    <span className="step-desc">Find the Object ID in the URL or details section:</span>
+                                    <code className="guide-code">suiscan.xyz/object/<span className="code-highlight">[OBJECT_ID]</span></code>
+                                </div>
+                            </div>
+
+                            <div className="guide-step">
+                                <div className="guide-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                                    </svg>
+                                </div>
+                                <div className="guide-text">
+                                    <span className="step-title">3. Paste the Object ID above</span>
+                                    <span className="step-desc">Enter the ID into the input field above.</span>
+                                </div>
+                            </div>
+
+                            <div className="guide-step">
+                                <div className="guide-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                        <polyline points="22 4 12 14.01 9 11.01" />
+                                    </svg>
+                                </div>
+                                <div className="guide-text">
+                                    <span className="step-title">4. Click 'Set as Profile'</span>
+                                    <span className="step-desc">Your NFT will appear as your profile picture!</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="guide-footer">
+                            <div className="network-badge">
+                                <span className="dot" />
+                                Supported Network: <strong>Sui Network</strong>
+                            </div>
+
+                            <div className="common-issues">
+                                <h5>Common Issues</h5>
+                                <p>• Make sure the Object ID is valid (starts with 0x)</p>
+                                <p>• Ensure the NFT has a valid image URL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Quick Start Section */}

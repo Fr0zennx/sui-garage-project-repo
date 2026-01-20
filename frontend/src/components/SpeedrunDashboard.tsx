@@ -12,7 +12,6 @@ import { WelcomeHero } from './dashboard/WelcomeHero';
 import { DashboardContent } from './dashboard/DashboardContent';
 
 // Lazy load heavy components
-const PixelBlast = lazy(() => import('./ui/PixelBlast'));
 const Profile = lazy(() => import('./Profile'));
 const LessonView = lazy(() => import('./LessonView'));
 const CharacterCardView = lazy(() => import('./CharacterCardView'));
@@ -59,9 +58,7 @@ function SpeedrunDashboard() {
   const [uiReady, setUiReady] = useState(false);
   // Stage 2: Core Logic State (Wallet, Data Fetching)
   const [coreReady, setCoreReady] = useState(false);
-  // Stage 3: Heavy Load State (Assets, Preloads, Background Tasks)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [heavyReady, setHeavyReady] = useState(false);
+
 
   // Stage 1: Critical UI Rendered -> Trigger Stage 2 (Heavy UI)
   useEffect(() => {
@@ -87,7 +84,6 @@ function SpeedrunDashboard() {
     if (!coreReady) return;
 
     const runHeavyTasks = () => {
-      setHeavyReady(true);
 
       // Preload heavy generic components / code chunks when browser is idle
       const preloadComponents = async () => {
@@ -165,32 +161,9 @@ function SpeedrunDashboard() {
 
   return (
     <div className="dashboard-container">
-      {/* PixelBlast Background - Deferred */}
-      <div className="pixel-blast-background">
-        {uiReady && (
-          <Suspense fallback={null}>
-            <PixelBlast
-              variant="circle"
-              pixelSize={6}
-              color="#4facfe"
-              patternScale={3}
-              patternDensity={1.2}
-              pixelSizeJitter={0.5}
-              enableRipples
-              rippleSpeed={0.4}
-              rippleThickness={0.12}
-              rippleIntensityScale={1.5}
-              liquid
-              liquidStrength={0.12}
-              liquidRadius={1.2}
-              liquidWobbleSpeed={5}
-              speed={0.6}
-              edgeFade={0.25}
-              transparent
-            />
-          </Suspense>
-        )}
-      </div>
+      {/* PixelBlast Background - DISABLED for Performance */}
+      <div className="pixel-blast-background" />
+      {/* PixelBlast removed - Three.js was adding 500KB+ to bundle */}
 
       <DashboardHeader
         currentAccount={currentAccount}
