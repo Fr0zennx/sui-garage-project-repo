@@ -43,6 +43,10 @@
   pointer-events: none;
   background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   opacity: 0.4;
+  /* GPU acceleration for smooth scroll */
+  transform: translateZ(0);
+  will-change: transform;
+  contain: strict;
 }
 
 /* Header */
@@ -52,11 +56,17 @@
   left: 0;
   right: 0;
   z-index: 50;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: rgba(10, 14, 45, 0.85);
+  /* Slightly more opaque to reduce blur need */
+  backdrop-filter: blur(12px);
+  /* Reduced blur for better perf */
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: var(--glass-border);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  /* GPU acceleration */
+  transform: translateZ(0);
+  will-change: transform;
+  contain: layout style;
 }
 
 .header-content {
@@ -191,6 +201,9 @@
   padding-top: 5rem;
   position: relative;
   z-index: 2;
+  /* Smooth scrolling optimization */
+  transform: translateZ(0);
+  will-change: scroll-position;
 }
 
 .main-content::before {
@@ -200,6 +213,8 @@
   background: var(--grad-overlay);
   z-index: -1;
   pointer-events: none;
+  /* GPU layer */
+  transform: translateZ(0);
 }
 
 /* Get Started / Hero */

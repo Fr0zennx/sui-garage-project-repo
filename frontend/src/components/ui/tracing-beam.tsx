@@ -22,18 +22,19 @@ export const TracingBeam: React.FC<TracingBeamProps> = ({ children, className })
     }
   }, []);
 
+  // Optimized spring settings for smoother scroll (lower stiffness = less computation)
   const y1 = useSpring(
     useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]),
     {
-      stiffness: 500,
-      damping: 90,
+      stiffness: 100,  // Reduced from 500
+      damping: 30,     // Reduced from 90
     }
   );
   const y2 = useSpring(
     useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]),
     {
-      stiffness: 500,
-      damping: 90,
+      stiffness: 100,  // Reduced from 500
+      damping: 30,     // Reduced from 90
     }
   );
 
@@ -43,6 +44,8 @@ export const TracingBeam: React.FC<TracingBeamProps> = ({ children, className })
       className={className}
       style={{
         position: "relative",
+        contain: "layout style", // CSS containment for performance
+        willChange: "transform",
       }}
     >
       <div
@@ -52,6 +55,8 @@ export const TracingBeam: React.FC<TracingBeamProps> = ({ children, className })
           left: "20px",
           height: `${svgHeight}px`,
           width: "4px",
+          contain: "strict", // Strict containment for SVG container
+          pointerEvents: "none",
         }}
       >
         <svg
@@ -92,7 +97,7 @@ export const TracingBeam: React.FC<TracingBeamProps> = ({ children, className })
           </defs>
         </svg>
       </div>
-      <div ref={contentRef} style={{ marginLeft: "60px" }}>
+      <div ref={contentRef} style={{ marginLeft: "60px", contain: "content" }}>
         {children}
       </div>
     </motion.div>

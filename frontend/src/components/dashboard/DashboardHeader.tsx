@@ -17,8 +17,11 @@ export function DashboardHeader({ currentAccount, onDisconnect, onOpenProfile }:
                         src="https://cryptologos.cc/logos/sui-sui-logo.png"
                         alt="Sui Logo"
                         className="sui-logo"
-                        loading="lazy"
+                        loading="eager"
+                        fetchPriority="high"
                         decoding="async"
+                        width={42}
+                        height={42}
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             if (target.src.includes('cryptologos')) {

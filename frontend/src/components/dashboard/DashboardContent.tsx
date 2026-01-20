@@ -30,8 +30,11 @@ export function DashboardContent({ uiReady }: DashboardContentProps) {
                                             src={item.image}
                                             alt={item.title}
                                             className="content-image"
-                                            loading="lazy"
+                                            loading={index === 0 ? "eager" : "lazy"}
+                                            fetchPriority={index === 0 ? "high" : "auto"}
                                             decoding="async"
+                                            width={800}
+                                            height={450}
                                         />
                                     )}
                                     {item.description}
